@@ -128,8 +128,8 @@ header{
 }
 .main-content_div h1{
   letter-spacing: 2px;
-  color: #111;
-  font-size: 72px;
+  color: #333;
+  font-size: 68px;
   cursor: default;
   transition: color 0.4s ease;
 }
@@ -137,7 +137,8 @@ header{
   color: #333;
 }
 .shifted-text {
-  font-family: "proxima nova bold", "Helvetica Neue", Helvetica, Arial, Sans-serif;  display: inline-block;
+  font-family: "proxima nova bold", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+  display: inline-block;
   transition: transform 0.3s ease;
 }
 .shifted-text:hover {
@@ -146,7 +147,7 @@ header{
   text-shadow: 2px 2px 0px rgba(0,0,0,0.4);
 }
 .greetings_div{
-  margin-top: 80px;
+  margin-top: 85px;
   width: 100%;
   height: auto;
   display: flex;
@@ -158,7 +159,7 @@ header{
   font-size: 17px;
   color: #333;
   background-color: #facf0f;
-  padding: 16px 32px;
+  padding: 18px 30px;
   border-radius: 5px;
   letter-spacing: 1px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
