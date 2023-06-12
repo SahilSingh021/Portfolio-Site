@@ -150,7 +150,7 @@ header{
   text-shadow: 2px 2px 0px rgba(0,0,0,0.4);
 }
 .greetings_div{
-  margin-top: 85px;
+  margin-top: 82px;
   width: 100%;
   height: auto;
   display: flex;
@@ -180,6 +180,8 @@ header{
   width: 100%;
   height: auto;
   font-size: 82px;
+  padding-right: 10px;
+  margin-top: -70px;
   display: flex;
   justify-content: right;
   animation: left-right_bobbing 2s infinite;
