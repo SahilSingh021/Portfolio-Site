@@ -39,7 +39,7 @@
     <div class="main_container">
         <div class="main_div">
             <div class="main-content_container">
-                <div class="main-content_container2">
+                <div class="main-content_container-2">
                     <div class="main-content_div">
                         <div class="quote-first_div">
                             <strong>"</strong>
@@ -56,22 +56,30 @@
                             <span class="shifted-text">Extraordinaire</span>
                             <span class="shifted-text">...</span>
                         </h1>
-
-                        <div class="greetings_div">
-                            <span class="greetings-text_span">HI, MY NAME IS SAHIL</span>
-                        </div>
                         <div class="quote-second_div">
                             <strong>"</strong>
                         </div>
-                        <div class="scroll-down-i_div">
-                            <i id="scroll-down_i" class="ri-arrow-drop-down-line"></i>
+                        <div class="greetings_div" onclick="scrollToSecondary()">
+                            <span class="greetings-text_span">HI, MY NAME IS SAHIL</span>
                         </div>
+                        <div class="scroll-down-i_div" onclick="scrollToSecondary()">
+                            <i id="scroll-down_i" class="ri-arrow-drop-down-line"></i>
+                        </div>                        
                     </div>
                 </div>
             </div>
         </div>
-
-        <script src="js/script.js"></script>
+        <div id="secondary" class="secondary-content_div">
+            <div class="about-me_container">
+                <div class="about-me_div">
+                    <h1>ABOUT ME</h1>
+                    <span>I am Sahil, an experienced software developer with a solid year of practical industry experience. Starting from September 2023, I will be embarking on an exciting new chapter in my career as I begin studying Software Engineering at university. I am eagerly anticipating the opportunity to broaden my knowledge, collaborate with peers, and delve deeper into the diverse realms of software engineering, encompassing programming languages, methodologies, and problem-solving techniques.</span>
+                    <span>If you would like to get in touch with me, please feel free to connect with me on LinkedIn. I look forward to connecting with you!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

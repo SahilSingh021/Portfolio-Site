@@ -10,6 +10,7 @@ body{
   background-color: white;
 }
 .header_container{
+  z-index: 1000;
   position: fixed;
   top: 0;
   left: 0;
@@ -81,29 +82,30 @@ header{
   color: #facf0f;
 }
 .main_container{
+  background-color: aqua;
   padding-top: 88px;
   width: 100%;
   min-height: 100vh;
   height: auto;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   overflow: auto;
 }
 .main_div{
-  flex: 1;
   width: 100%;
-  height: auto;
+  height: 93.6vh;
   display: flex;
   flex-direction: column;
-  overflow: auto;
 }
 .main-content_container{
   background-color: #f9fafa;
   width: 100%;
-  height: 700px;
+  height: 100%;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
 }
 .quote-first_div{
+  margin-top: 195px;
   width: 100%;
   height: auto;
   font-size: 82px;
@@ -114,13 +116,11 @@ header{
 .quote-first_div:hover{
   cursor: default;
 }
-.main-content_container2{
+.main-content_container-2{
   width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
-  padding-top: 100px;
-  padding-bottom: 100px;
 }
 .main-content_div{
   width: 80%;
@@ -149,8 +149,19 @@ header{
   border-bottom: 2px solid #333;
   text-shadow: 2px 2px 0px rgba(0,0,0,0.4);
 }
+.quote-second_div{
+  width: 100%;
+  height: auto;
+  font-size: 82px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: right;
+  animation: left-right_bobbing 2s infinite;
+}
+.quote-second_div:hover{
+  cursor: default;
+}
 .greetings_div{
-  margin-top: 82px;
   width: 100%;
   height: auto;
   display: flex;
@@ -158,6 +169,7 @@ header{
   align-items: center;
 }
 .greetings-text_span{
+  z-index: 1;
   font-family: 'Source Sans 3', sans-serif;
   font-size: 18px;
   color: #333;
@@ -176,20 +188,8 @@ header{
   border: 2px solid #facf0f;
   transform: translateY(-5px);
 }
-.quote-second_div{
-  width: 100%;
-  height: auto;
-  font-size: 82px;
-  padding-right: 10px;
-  margin-top: -70px;
-  display: flex;
-  justify-content: right;
-  animation: left-right_bobbing 2s infinite;
-}
-.quote-second_div:hover{
-  cursor: default;
-}
 .scroll-down-i_div{
+  margin-top: 400px;
   width: 100%;
   height: auto;
   display: flex;
@@ -199,7 +199,7 @@ header{
 #scroll-down_i{
   font-size: 36px;
   border-radius: 1vh;
-  margin-top: 60px;
+  margin-top: 160px;
   color: black;
   border: 2px solid black;
   transition: color 0.4s ease;
@@ -210,7 +210,27 @@ header{
   color: white;
   background-color: black;
 }
-
+.secondary-content_div{
+  padding-top: 88px;
+  width: 100%;
+  height: 100vh;  
+}
+.about-me_container{
+  background-color: antiquewhite;
+  width: 50%;
+  height: 100%;
+}
+.about-me_div{
+  display: flex;
+  justify-content: center;
+}
+.about-me_div h1{
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  color: #333;
+  border-bottom: 4px solid #333;
+}
 
 @keyframes up-down_bobbing {
   0% {
