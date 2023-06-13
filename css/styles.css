@@ -82,7 +82,6 @@ header{
   color: #facf0f;
 }
 .main_container{
-  background-color: aqua;
   padding-top: 88px;
   width: 100%;
   min-height: 100vh;
@@ -202,8 +201,7 @@ header{
   margin-top: 160px;
   color: black;
   border: 2px solid black;
-  transition: color 0.4s ease;
-  transition: background-color 0.4s ease;
+  transition: all 0.4s ease;
 }
 #scroll-down_i:hover{
   cursor: pointer;
@@ -211,25 +209,77 @@ header{
   background-color: black;
 }
 .secondary-content_div{
-  padding-top: 88px;
   width: 100%;
-  height: 100vh;  
+  height: 100vh; 
+  display: flex;
+  align-items: center;
 }
 .about-me_container{
-  background-color: antiquewhite;
   width: 50%;
-  height: 100%;
-}
-.about-me_div{
-  display: flex;
+  height: auto;
+  display: inline-block;
   justify-content: center;
+  align-items: center;
 }
-.about-me_div h1{
-  padding-top: 50px;
+.about-me-header_div{
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  padding-left: 160px;
+}
+.about-me-header_div h1{
   color: #333;
-  border-bottom: 4px solid #333;
+  font-size: 46px;
+  cursor: default;
+  padding-right: 12px;
+  border-bottom: 4px solid #facf0f;
+}
+.about-me-header_div h1 span{
+  display: inline-block;
+  letter-spacing: -12px;
+}
+.about-me-header_div h1 span:hover {
+  color: #facf0f;
+  animation: pop 0.8s 1;
+  animation-delay: 50ms;
+}
+.about-me-body_div{
+  display: inline-block;
+  justify-content: left;
+  padding: 50px 160px;
+}
+.about-me-body_div span{
+  color: #333;
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.about-me-body_div span strong{
+  color: #facf0f;
+  border-bottom: 1px solid #666;
+}
+.about-me-body_div span strong:hover{
+  cursor: pointer;
+}
+.about-me-body_div span b{
+  color: #666;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  75% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes up-down_bobbing {

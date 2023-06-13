@@ -4,3 +4,7 @@ function scrollToSecondary() {
     secondarySection.scrollIntoView({ behavior: 'smooth' });
   }
   
+  function openLinkInNewTab(event, url) {
+    event.preventDefault();
+    window.open(url, '_blank');
+  }
