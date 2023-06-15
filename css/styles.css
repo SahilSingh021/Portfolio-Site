@@ -208,6 +208,10 @@ header{
   color: white;
   background-color: black;
 }
+.secondary-content_container{
+  width: 100%;
+  height: auto;
+}
 .secondary-content_div{
   width: 100%;
   height: 100vh; 
@@ -239,7 +243,7 @@ header{
 }
 .about-me-header_div h1 span:hover {
   color: #facf0f;
-  animation: pop 0.8s 1;
+  animation: pop 1s 1;
   animation-delay: 50ms;
 }
 .about-me-body_div{
@@ -263,6 +267,130 @@ header{
 .about-me-body_div span b{
   color: #666;
 }
+.experience_container{
+  width: 50%;
+}
+.experience-header_div{
+  display: flex;
+  justify-content: left;
+  padding-left: 160px;
+}
+.experience-header_div h1{
+  color: #333;
+  font-size: 46px;
+  cursor: default;
+  padding-right: 12px;
+  border-bottom: 4px solid #facf0f;
+}
+.experience-header_div h1 span{
+  display: inline-block;
+  letter-spacing: -12px;
+}
+.experience-header_div h1 span:hover {
+  color: #facf0f;
+  animation: pop 1s 1;
+  animation-delay: 50ms;
+}
+.experience-body_div {
+  position: relative;
+  overflow: hidden;
+  margin-top: 15px;
+}
+#wrap {
+  width: 100%;
+  min-height: 530px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+.wraped-section {
+  height: auto;
+  display: inline-block;
+  flex: 0 0 100%;
+  white-space: normal;
+  text-align: left;
+  padding: 20px 160px;
+}
+.wraped-section h1{
+  color: #666;
+  font-family: 'Source Sans 3', sans-serif;
+  transition: transform 0.4s ease;
+}
+.wraped-section h1:hover{
+  cursor: default;
+  transform: translateY(-5px);
+}
+.wraped-section h1 strong{
+  color: #555;
+  font-family: 'Source Sans 3', sans-serif;
+}
+.wraped-section h3{
+  color: #666;
+  padding-left: 1px;
+  font-size: 16px;
+  padding-bottom: 30px;
+  font-family: 'Source Sans 3', sans-serif;
+}
+.wraped-section h3:hover{
+  cursor: default;
+}
+.wraped-section span{
+  color: #333;
+  font-size: 18px;
+  line-height: 1.7;
+  font-family: 'Poppins', sans-serif;
+}
+.wraped-section span b{
+  color: #666;
+}
+.arrow-left-indicator{
+  color: #333;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  animation: left-right_bobbing 2s infinite;
+}
+.arrow-left-indicator:hover{
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  border: 2px solid black;
+  animation-play-state: paused;
+}
+.ri-arrow-left-line{
+  font-size: 30px;
+  border: 2px solid transparent;
+  transition: background-color 0.4s ease;
+  transition: color 0.4s ease;
+  transition: border 0.4s ease;
+}
+.arrow-right-indicator {
+  color: #333;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  height: auto;
+  animation: left-right_bobbing 2s infinite;
+}
+.arrow-right-indicator:hover{
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  border: 2px solid black;
+  animation-play-state: paused;
+}
+.ri-arrow-right-line{
+  font-size: 30px;
+  border: 2px solid transparent;
+  transition: background-color 0.4s ease;
+  transition: color 0.4s ease;
+  transition: border 0.4s ease;
+}
+
 
 @keyframes pop {
   0% {
