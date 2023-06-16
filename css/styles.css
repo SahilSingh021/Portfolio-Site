@@ -137,7 +137,6 @@ header{
 }
 .shifted-text {
   font-family: 'Luckiest Guy', cursive;
-  /*font-family: "proxima nova bold", "Helvetica Neue", Helvetica, Arial, Sans-serif;*/
   display: inline-block;
   transition: transform 0.3s ease;
 }
@@ -209,8 +208,10 @@ header{
   background-color: black;
 }
 .secondary-content_container{
+  z-index: 1;
   width: 100%;
   height: auto;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
 }
 .secondary-content_div{
   width: 100%;
@@ -390,7 +391,106 @@ header{
   transition: color 0.4s ease;
   transition: border 0.4s ease;
 }
-
+.third-content_container{
+  background-color: #f9fafa;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.third-content_div{
+  width: 100%;
+  height: auto;/*auto this*/
+}
+.projects-header_container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.projects-header_container h1{
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  font-size: 46px;
+  font-weight: bold;
+  cursor: default;
+  border-bottom: 4px solid #facf0f;
+}
+.projects-header_container h1 span{
+  display: inline-block;
+  letter-spacing: -10px;
+  transition: transform 0.5s ease;
+}
+.projects-header_container h1 span:hover{
+  color: #facf0f;
+  transform: translateY(-5px);
+}
+.projects-h3_container{
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.projects-h3_container h3{
+  color: #666;
+  font-size: 18px;
+}
+.projects-h3_container h3 strong{
+  color: #facf0f;
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+}
+.projects-content_container{
+  width: 100%;
+  height: auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  overflow: hidden;
+}
+.projects-content_div{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.project_div{
+  background-color: white;
+  width: 500px;
+  height: 650px;
+  margin: 70px 70px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: transform 0.4s ease;
+}
+.project_div:hover{
+  transform: translateY(-15px);
+}
+.image_div{
+  width: 100%;
+  height: 40%;
+  padding-top: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 25px 20px -20px;
+}
+.image{
+  width: 100%;
+  height: 100%;
+}
+.project-header_container{
+  color: #666;
+  padding-top: 30px;
+  padding-bottom: 15px;
+  padding-left: 40px;
+  padding-right: 40px;
+  font-family: 'Poppins', sans-serif;
+}
+.project-body_container{
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.project-body_container span{
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+}
 
 @keyframes pop {
   0% {

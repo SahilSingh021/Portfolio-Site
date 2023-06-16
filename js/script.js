@@ -1,9 +1,9 @@
 
 function scrollToElementId(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+  }
 }
 
 function scrollToElement(element) {
