@@ -23,16 +23,16 @@
 <body>
     <div class="header_container">
         <header>
-            <div class="header-left_div">
-                <a href="/index.html"><img src="images/page-logo.png" class="logo"></a>
+            <div class="header-left_div" onclick="refreshPage(); scrollToTop();">
+                <img src="images/page-logo.png" class="logo">
                 <h1 class="header-name_h1">SAHILPREET SINGH</h1>
             </div>
             <div class="header-right_div">
                 <ul>
-                    <li>HOME</li>
+                    <li onclick="scrollToTop();">HOME</li>
                     <li onclick="scrollToElementId('about-me');">ABOUT</li>
                     <li onclick="scrollToElementId('projects');">PROJECTS</li>
-                    <li>CONTACT</li>
+                    <li onclick="scrollToElementId('contact-form');">CONTACT</li>
                 </ul>
                 <i class="ri-menu-fill"></i>
             </div>
@@ -206,7 +206,7 @@
                 </div>
                 <div class="projects-content_container">
                     <div class="projects-content_div">
-                        <div class="project_div">
+                        <div class="project_div" onclick="openLinkInNewTab(event, 'https://sahilsingh021.github.io/Meal-PrepSite/');">
                             <div class="image_div">
                                 <img class="image" src="/images/meal-prep-site_image.png" alt="meal-prep-site_image">
                             </div>
@@ -217,7 +217,7 @@
                                 <span>This website utilizes the power of a free API to deliver comprehensive details about the user's selected cuisine. In addition to offering ingredients and step-by-step instructions, it enhances the cooking experience by incorporating an instructional video that guide users through the recipe preparation process.</span>
                             </div>
                         </div>
-                        <div class="project_div">
+                        <div class="project_div" onclick="openLinkInNewTab(event,'https://sahilsingh021.github.io/WeatherSite/')">
                             <div class="image_div">
                                 <img class="image" src="/images/weather-site_image.png" alt="meal-prep-site_image">
                             </div>
@@ -230,6 +230,17 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="contact-form" class="contact-container">
+            <div class="contact-div">
+                <h1><span>Contact Form</span></h1>
+                <form method="post" action="https://formspree.io/f/xnqyeboy">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <input type="submit" value="Submit">
+                </form>
             </div>
         </div>
     </div>

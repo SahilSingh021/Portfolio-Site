@@ -10,6 +10,18 @@ function scrollToElement(element) {
     element.scrollIntoView({ behavior: "smooth" });
 }
 
+function scrollToTop() {
+  window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+  });
+}
+
+function refreshPage() {
+  window.scrollTo(0, 0);
+  location.reload();
+}
+
 function openLinkInNewTab(event, url) {
   event.preventDefault();
   window.open(url, '_blank');
