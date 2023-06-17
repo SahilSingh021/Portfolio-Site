@@ -120,7 +120,8 @@ header {
 }
 
 .quote-first_div {
-  margin-top: 195px;
+  margin-top: 170px;
+  margin-left: 120px;
   width: 100%;
   height: auto;
   font-size: 82px;
@@ -148,7 +149,7 @@ header {
 .main-content_div h1 {
   letter-spacing: 2px;
   color: #333;
-  font-size: 58px;
+  font-size: 48px;
   cursor: default;
   transition: color 0.4s ease;
 }
@@ -176,6 +177,7 @@ header {
   height: auto;
   font-size: 82px;
   margin-top: 50px;
+  padding-right: 120px;
   display: flex;
   justify-content: right;
   animation: left-right_bobbing 2s infinite;
@@ -201,7 +203,7 @@ header {
   background-color: #facf0f;
   padding: 18px 30px;
   border-radius: 5px;
-  letter-spacing: 1px;
+  letter-spacing: 1px;  border: 2px solid transparent;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   transition: background-color 0.4s ease;
   transition: border 0.4s ease;
@@ -215,8 +217,23 @@ header {
   transform: translateY(-5px);
 }
 
+.greetings-body_div{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 80px;
+  cursor: default;
+}
+
+.greetings-body-text_span{
+  
+  width: 900px;
+  font-size: 22px;
+}
+
 .scroll-down-i_div {
-  margin-top: 400px;
+  margin-top: 16%;
   width: 100%;
   height: auto;
   display: flex;
@@ -533,6 +550,7 @@ header {
 .project_div {
   cursor: pointer;
   background-color: white;
+  border-radius: 1vh;
   width: 500px;
   height: 650px;
   margin: 70px 70px;
@@ -586,11 +604,12 @@ header {
 }
 
 .contact-div {
-  max-width: 700px;
+  max-width: 650px;
   width: 100%;
-  padding: 20px;
-  background: #f9fafa;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 30px 30px;
+  padding-top: 40px;
+  background: #f9fafa; 
+  border-radius: 1vh;
 }
 
 .contact-container h1 {
