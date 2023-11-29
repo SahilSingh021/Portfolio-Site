@@ -448,7 +448,6 @@ header {
 
 .ri-arrow-left-line {
   font-size: 30px;
-  border: 2px solid transparent;
   transition: background-color 0.4s ease;
   transition: color 0.4s ease;
   transition: border 0.4s ease;
