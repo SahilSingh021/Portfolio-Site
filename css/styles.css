@@ -448,6 +448,7 @@ header {
 
 .ri-arrow-left-line {
   font-size: 30px;
+  border: 2px solid transparent;
   transition: background-color 0.4s ease;
   transition: color 0.4s ease;
   transition: border 0.4s ease;
@@ -556,7 +557,7 @@ header {
 .project_div {
   cursor: pointer;
   background-color: white;
-  border-radius: 1vh;
+  border-radius: 0.4vh;
   width: 500px;
   height: 650px;
   margin: 70px 70px;
@@ -883,6 +884,16 @@ header {
   .scroll-down-i_div {
     margin-top: 200px;
   }
+  #wrap {
+    flex-direction: column;
+    padding-bottom: 100px;
+  }
+  .ri-arrow-left-line {
+    display: none;
+  }
+  .ri-arrow-right-line {
+    display: none;
+  }
 }
 @media (max-width: 600px) {
   .greetings-body_div{
@@ -933,6 +944,9 @@ header {
   .greetings-text_span {
     font-size: 12px;
   }
+}
+
+@media (max-height: 1350px){
   .scroll-down-i_div {
     display: none;
   }
