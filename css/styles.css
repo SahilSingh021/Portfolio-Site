@@ -955,7 +955,7 @@ header {
   }
   .quote-first_div{
     font-size: 50px;
-    margin-top: 80px;
+    margin-top: 100px;
   }
   .quote-second_div{
     font-size: 50px;
@@ -968,6 +968,10 @@ header {
   }
   .greetings-text_span {
     font-size: 16px;
+    margin-top: 60px;
+  }
+  .greetings-body_div{
+    display: none;
   }
 }
 @media (max-width: 375px) {
@@ -981,9 +985,6 @@ header {
   }
   .main-content_div h1 {
     font-size: 20px;
-  }
-  .greetings-body_div{
-    display: none;
   }
   .greetings-text_span {
     font-size: 12px;
