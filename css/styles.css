@@ -185,7 +185,7 @@ header {
   width: 100%;
   height: auto;
   font-size: 82px;
-  margin-top: 50px;
+  margin-top: 45px;
   padding-right: 120px;
   display: flex;
   justify-content: right;
@@ -498,6 +498,7 @@ header {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 50px;
 }
 
 .projects-header_container h1 {
@@ -776,6 +777,11 @@ header {
     display: block;
   }
 }
+@media (max-width: 970px){
+  .quote-first_div {
+    margin-top: 80px;
+  }
+}
 @media (max-width: 930px){
   .ri-menu-fill{
     display: flex;
@@ -807,6 +813,13 @@ header {
     transition: color 0.4s ease;
     letter-spacing: 1px;
     border-bottom: 2px solid black;
+  }
+  .quote-first_div {
+    margin-top: 80px;
+    font-size: 60px;
+  }
+  .quote-second_div{
+    font-size: 60px;
   }
   .scroll-down-i_div {
     margin-top: 70px;
@@ -873,13 +886,16 @@ header {
     margin-top: 100px;
   }
   .main-content_div h1 {
-    font-size: 28px;
+    font-size: 30px;
   }
   .greetings-body_div{
     padding-bottom: 100px;
   }  
   .greetings-body-text_span{
     font-size: 18px;
+  }
+  .quote-second_div{
+    padding-bottom: 70px;
   }
   .scroll-down-i_div {
     margin-top: 200px;
@@ -922,6 +938,14 @@ header {
     width: 100%;
   }
 }
+@media (max-width: 550px) {
+  .quote-first_div {
+    margin-top: 50px;
+  }
+  .quote-second_div{
+    padding-bottom: 50px;
+  }
+}
 @media (max-width: 500px) {
   header {
     padding: 1rem 2rem;
@@ -930,19 +954,48 @@ header {
     display: none;
   }
   .quote-first_div{
-    font-size: 48px;
+    font-size: 50px;
+    margin-top: 80px;
   }
   .quote-second_div{
-    font-size: 48px;
+    font-size: 50px;
   }
   .main-content_div h1 {
-    font-size: 24px;
+    font-size: 28px;
   }
   .greetings-body-text_span{
-    font-size: 14px;
+    font-size: 18px;
+  }
+  .greetings-text_span {
+    font-size: 16px;
+  }
+}
+@media (max-width: 375px) {
+  .quote-first_div{
+    font-size: 35px;
+    margin-top: 120px;
+  }
+  .quote-second_div{
+    font-size: 35px;
+    margin-top: 30px;
+  }
+  .main-content_div h1 {
+    font-size: 20px;
+  }
+  .greetings-body_div{
+    display: none;
   }
   .greetings-text_span {
     font-size: 12px;
+  }
+  .projects-header_container h1 {
+    font-size: 36px;
+  }
+  .projects-h3_container h3 {
+    font-size: 16px;
+  }
+  .contact-container h1{
+    font-size: 36px;
   }
 }
 
