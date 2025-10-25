@@ -14,7 +14,10 @@
   <!--remixicons link-->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet" />
 
-  <title>Code Person | Sahil</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.globe.min.js"></script>
+
+  <title>Sahil | Portifolio</title>
   <link rel="icon" type="image/png" href="images/page-logo.png" />
 </head>
 <body>
@@ -45,20 +48,29 @@
       <div class="main-content_container">
         <div class="main-content_container-2">
           <div class="main-content_div">
+            <div class="quote-first_div"><strong>"</strong></div>
             <h1>
-              <div class="quote-first_div"><strong>"</strong></div>
-              <span class="shifted-text">Code</span>
-              <span class="shifted-text"></span>
-              <span class="shifted-text">Alchemist:</span>
-              <span class="shifted-text"></span>
-              <span class="shifted-text">Your</span>
-              <span class="shifted-text"></span>
-              <span class="shifted-text">Developer</span>
-              <span class="shifted-text"></span>
-              <span class="shifted-text">Extraordinaire</span>
-              <span class="shifted-text">...</span>
-              <div class="quote-second_div"><strong>"</strong></div>
+              <span class="shifted-text-1">Hi,</span>
+              <span class="shifted-text-1"></span>
+              <span class="shifted-text-1">I'm</span>
+              <span class="shifted-text-1"></span>
+              <span id="shifted-text-name">Sahil</span>
+              <span class="shifted-text-1">.</span>
             </h1>
+
+            <h1>
+              <span class="shifted-text-2">Code</span>
+              <span class="shifted-text-2"></span>
+              <span class="shifted-text-2">Alchemist:</span>
+              <span class="shifted-text-2"></span>
+              <span class="shifted-text-2">Your</span>
+              <span class="shifted-text-2"></span>
+              <span class="shifted-text-2">Developer</span>
+              <span class="shifted-text-2"></span>
+              <span class="shifted-text-2">Extraordinaire</span>
+              <span class="shifted-text-2">...</span>
+            </h1>
+            <div class="quote-second_div"><strong>"</strong></div>
 
             <div class="greetings-body_div">
               <span class="greetings-body-text_span">
@@ -67,7 +79,7 @@
             </div>
 
             <div class="greetings_div">
-              <span class="greetings-text_span" onclick="scrollToElementId('about-me');">MY NAME IS SAHIL</span>
+              <span class="greetings-text_span" onclick="scrollToElementId('about-me');">Learn More</span>
             </div>
           </div>
         </div>
@@ -240,5 +252,20 @@
   </div>
 
   <script src="js/script.js"></script>
+  <script>
+    VANTA.GLOBE({
+      el: ".main-content_container",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0x959696,      // Line color
+      color2: 0xfacf0f  ,     // Dot color
+      backgroundColor: 0xf9fafa
+    })
+  </script>
 </body>
 </html>
