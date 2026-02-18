@@ -1,269 +1,426 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sahilpreet Singh | Portfolio</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Luckiest+Guy&family=Poppins:wght@300;400;500;600;700;800;900&family=Source+Sans+3:wght@700&display=swap" rel="stylesheet" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="css/styles.css" />
+    <!-- Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
 
-  <!--remixicons link-->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.globe.min.js"></script>
+  <body>
+    <header class="site-header" id="top">
+      <div class="container nav">
+        <button class="brand" type="button" data-scroll="#home" aria-label="Go to home">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__name">SAHILPREET SINGH</span>
+        </button>
 
-  <title>Sahil | Portifolio</title>
-  <link rel="icon" type="image/png" href="images/page-logo.png" />
-</head>
-<body>
-  <div class="header_container">
-    <header>
-      <div class="header-left_div" onclick="refreshPage(); scrollToTop();">
-        <img src="images/page-logo.png" class="logo" alt="Sahil logo" />
-        <h1 class="header-name_h1">SAHILPREET SINGH</h1>
+        <nav class="nav__links" aria-label="Primary">
+          <a class="nav__link" href="#home" data-nav="home">Home</a>
+          <a class="nav__link" href="#about_sr" data-nav="about">About</a>
+          <a class="nav__link" href="#projects" data-nav="projects">Projects</a>
+          <a class="nav__link" href="#contact" data-nav="contact">Contact</a>
+        </nav>
+
+        <div class="nav__actions">
+          <button
+            class="icon-btn nav__burger"
+            id="menuToggle"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+          >
+            <i class="ri-menu-3-line" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
 
-      <i class="ri-close-circle-line" onclick="hideNavMenu();" aria-label="Close menu"></i>
-
-      <div class="header-right_div">
-        <ul>
-          <li onclick="scrollToTop();">HOME</li>
-          <li onclick="scrollToElementId('about-me');">ABOUT</li>
-          <li onclick="scrollToElementId('projects');">PROJECTS</li>
-          <li onclick="scrollToElementId('contact-form');">CONTACT</li>
-        </ul>
+      <div class="mobile-menu" id="mobileMenu" hidden>
+        <a class="mobile-menu__link" href="#home" data-nav="home">Home</a>
+        <a class="mobile-menu__link" href="#about_sr" data-nav="about">About</a>
+        <a class="mobile-menu__link" href="#projects" data-nav="projects">Projects</a>
+        <a class="mobile-menu__link" href="#contact" data-nav="contact">Contact</a>
       </div>
-
-      <i class="ri-menu-fill" onclick="displayNavMenu();" aria-label="Open menu"></i>
     </header>
-  </div>
 
-  <div class="main_container">
-    <div class="main_div">
-      <div class="main-content_container">
-        <div class="main-content_container-2">
-          <div class="main-content_div">
-            <div class="quote-first_div"><strong>"</strong></div>
-            <h1>
-              <span class="shifted-text-1">Hi,</span>
-              <span class="shifted-text-1"></span>
-              <span class="shifted-text-1">I'm</span>
-              <span class="shifted-text-1"></span>
-              <span id="shifted-text-name">Sahil</span>
-              <span class="shifted-text-1">.</span>
-            </h1>
+    <main id="main">
+      <!-- Hero -->
+      <section id="home" class="section hero">
+        <div class="container hero__grid">
+          <div class="hero__content">
+            <p class="terminal-pill">
+              <span class="terminal-prefix">$</span>
+              <span class="terminal-text">whoami</span>
+              <span class="terminal-result">→ Software Developer</span>
+              <span class="terminal-cursor" aria-hidden="true"></span>
+            </p>
 
-            <h1>
-              <span class="shifted-text-2">Code</span>
-              <span class="shifted-text-2"></span>
-              <span class="shifted-text-2">Alchemist:</span>
-              <span class="shifted-text-2"></span>
-              <span class="shifted-text-2">Your</span>
-              <span class="shifted-text-2"></span>
-              <span class="shifted-text-2">Developer</span>
-              <span class="shifted-text-2"></span>
-              <span class="shifted-text-2">Extraordinaire</span>
-              <span class="shifted-text-2">...</span>
-            </h1>
-            <div class="quote-second_div"><strong>"</strong></div>
+            <h1 class="hero__title">Hi, I’m <span class="accent">Sahil</span>.</h1>
 
-            <div class="greetings-body_div">
-              <span class="greetings-body-text_span">
-                I'm a passionate software developer, dedicated to crafting exceptional digital experiences that make a difference.
-              </span>
+            <p class="hero__subtitle">
+              I build practical software and web experiences that are clean, reliable, and easy to use.
+            </p>
+
+            <div class="hero__cta">
+              <a class="btn btn--primary" href="#projects" data-scroll="#projects">
+                <span class="btn__icon" aria-hidden="true">↳</span>
+                View Projects
+              </a>
+              <a class="btn btn--ghost" href="#contact" data-scroll="#contact">
+                <span class="btn__icon" aria-hidden="true">✉</span>
+                Contact
+              </a>
             </div>
 
-            <div class="greetings_div">
-              <span class="greetings-text_span" onclick="scrollToElementId('about-me');">Learn More</span>
+            <div class="hero__meta">
+              <a
+                class="meta-link"
+                href="https://www.linkedin.com/in/sahilsingh021/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i class="ri-linkedin-box-line" aria-hidden="true"></i>
+                LinkedIn
+              </a>
+              <a
+                class="meta-link"
+                href="https://github.com/SahilSingh021"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i class="ri-github-line" aria-hidden="true"></i>
+                GitHub
+              </a>
+            </div>
+          </div>
+
+          <aside class="terminal-card">
+            <div class="terminal-bar" aria-hidden="true">
+              <span class="dot yellow-dark"></span>
+              <span class="dot yellow"></span>
+              <span class="dot yellow-light"></span>
+              <span class="terminal-title">~/skills</span>
+            </div>
+
+            <div class="terminal-body">
+              <ul class="terminal-list">
+                <li><span class="bullet">•</span> C#, C++, SQL</li>
+                <li><span class="bullet">•</span> Low-level fundamentals</li>
+                <li><span class="bullet">•</span> Assembly (asm) + debugging mindset</li>
+                <li><span class="bullet">•</span> Web apps + APIs</li>
+              </ul>
+
+              <div class="divider"></div>
+
+              <p class="small muted">
+                I care about shipping work that’s maintainable, and solid under pressure.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section class="section">
+        <div class="container">
+          <div class="section-head" id="about_sr">
+            <h2><span class="mono">/</span> About</h2>
+            <p>
+              Software developer with industry experience and a strong interest in building practical,
+              effective digital solutions.
+            </p>
+          </div>
+
+          <div class="grid-2">
+            <div class="panel-stack">
+              <div class="panel">
+                <h3 class="panel__title"><span class="mono">></span> Summary</h3>
+                <p>
+                  I enjoy solving problems and delivering clear, reliable results, even when deadlines are
+                  tight. I work well independently and in teams, and I’m always learning new tools and
+                  trying to improve myself.
+                </p>
+                <p>
+                  Right now I’m focused on sharpening my engineering fundamentals and building projects that
+                  feel genuinely professional.
+                </p>
+              </div>
+
+              <div class="panel">
+                <h3 class="panel__title"><span class="mono">></span> Education</h3>
+
+                <div class="edu-item">
+                  <div class="edu-top">
+                    <strong>Anglia Ruskin University</strong>
+                    <span class="muted">BSc Computer Science (Year 3)</span>
+                  </div>
+                </div>
+
+                <div class="edu-item">
+                  <div class="edu-top">
+                    <strong>New City College</strong>
+                    <span class="muted">Information Technology</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3 class="panel__title"><span class="mono">></span> Experience</h3>
+
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-top">
+                    <strong>Recreation Assistant</strong>
+                    <span class="muted">Actihire (Part-time)</span>
+                  </div>
+                  <div class="timeline-bottom muted">Nov 2025 – Present</div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-top">
+                    <strong>Junior C# Developer</strong>
+                    <span class="muted">Sparta Global</span>
+                  </div>
+                  <div class="timeline-bottom muted">Sep 2022 – Apr 2023</div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-top">
+                    <strong>Junior Programmer</strong>
+                    <span class="muted">CMRRKAD System Ltd</span>
+                  </div>
+                  <div class="timeline-bottom muted">Aug 2021 – Aug 2022</div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-top">
+                    <strong>Risk Review Consultant</strong>
+                    <span class="muted">ReTRRAC Global</span>
+                  </div>
+                  <div class="timeline-bottom muted">Jun 2022 – Jul 2022</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="section projects">
+        <div class="container">
+          <div class="section-head">
+            <h2><span class="mono">/</span> Projects</h2>
+            <p>Quality over quantity is the motto.</p>
+          </div>
+
+          <article class="project-window">
+            <div class="project-window__bar" aria-hidden="true">
+              <span class="dot yellow-dark"></span>
+              <span class="dot yellow"></span>
+              <span class="dot yellow-light"></span>
+              <span class="project-window__title mono">~/projects/acsa</span>
+            </div>
+
+            <div class="project-window__body">
+              <header class="project-head">
+                <div>
+                  <h3 class="project-title">
+                    <span class="mono subtle">repo:</span>
+                    ACSA - AssaultCube Secure Arena
+                  </h3>
+                  <p class="muted project-sub">Final Year Project • platform integrity & anti-cheat</p>
+                </div>
+
+                <div class="project-meta">
+                  <span class="pill pill--green mono">ASP.NET</span>
+                  <span class="pill pill--green mono">C#</span>
+                  <span class="pill pill--green mono">c++</span>
+                </div>
+              </header>
+
+              <p class="project-desc">
+                An end-to-end competitive platform: the web app manages identity, accounts, and match hosting;
+                the anti-cheat DLL enforces integrity checks, logs suspicious activity, and connects to the
+                platform for authenticated play; and the forked AssaultCube client loads the anti-cheat at
+                startup.
+              </p>
+
+              <div class="components">
+                <section class="component">
+                  <div class="component__top">
+                    <span class="badge mono">01</span>
+                    <h4 class="component__title">Web Platform</h4>
+                  </div>
+                  <ul class="component__list">
+                    <li>ASP.NET Core (MVC/Razor)</li>
+                    <li>Microsoft Identity auth</li>
+                    <li>JWT sessions + match pooling</li>
+                    <li>Kestrel-hosted</li>
+                    <li>Clean UI</li>
+                  </ul>
+                </section>
+
+                <section class="component">
+                  <div class="component__top">
+                    <span class="badge mono">02</span>
+                    <h4 class="component__title">Anti-Cheat DLL (C++)</h4>
+                  </div>
+                  <ul class="component__list">
+                    <li>Debugger + remote debugger detection</li>
+                    <li>Module scanning + whitelist</li>
+                    <li>Logs suspicious / malicious activity</li>
+                    <li><span class="mono">.text</span> CRC32 baseline + monitor thread</li>
+                  </ul>
+                </section>
+
+                <section class="component">
+                  <div class="component__top">
+                    <span class="badge mono">03</span>
+                    <h4 class="component__title">Game Integration</h4>
+                  </div>
+                  <ul class="component__list">
+                    <li>Forked AssaultCube client</li>
+                    <li>Loads anti-cheat DLL at startup</li>
+                    <li>Communicates with anti-cheat for match initialization</li>
+                    <li>Delivers match results back to the anti-cheat</li>
+                  </ul>
+                </section>
+              </div>
+
+              <footer class="project-foot">
+                <ul class="tags tags--tight" aria-label="Topics">
+                  <li class="tag">Identity</li>
+                  <li class="tag">JWT</li>
+                  <li class="tag">Kestrel</li>
+                  <li class="tag">Anti-Cheat</li>
+                  <li class="tag">.dll</li>
+                </ul>
+
+                <div class="project-actions">
+                  <a class="btn btn--primary btn--small" href="#" id="liveDemoBtn">Live / Demo</a>
+                </div>
+              </footer>
+            </div>
+          </article>
+
+          <div class="center">
+            <a class="btn btn--ghost" href="https://github.com/SahilSingh021" target="_blank" rel="noreferrer">
+              View GitHub <i class="ri-arrow-right-line" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="section">
+        <div class="container">
+          <div class="section-head">
+            <h2><span class="mono">/</span> Contact</h2>
+            <p>Send me a message — I’ll reply as soon as I can.</p>
+          </div>
+
+          <div class="contact">
+            <form class="form" method="post" action="https://formspree.io/f/xnqyeboy">
+              <label>
+                <span><span class="mono">$</span> name</span>
+                <input type="text" name="name" placeholder="Your name" required />
+              </label>
+
+              <label>
+                <span><span class="mono">$</span> email</span>
+                <input type="email" name="email" placeholder="you@email.com" required />
+              </label>
+
+              <label>
+                <span><span class="mono">$</span> message</span>
+                <textarea name="message" placeholder="Your message..." rows="6" required></textarea>
+              </label>
+
+              <button class="btn btn--primary" type="submit">
+                Send <span class="mono" aria-hidden="true">↵</span>
+              </button>
+            </form>
+
+            <div class="panel">
+              <h3 class="panel__title"><span class="mono">></span> Links</h3>
+
+              <div class="stack">
+                <a
+                  class="meta-link"
+                  href="https://www.linkedin.com/in/sahilsingh021/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <i class="ri-linkedin-box-line" aria-hidden="true"></i>
+                  LinkedIn
+                </a>
+                <a class="meta-link" href="https://github.com/SahilSingh021" target="_blank" rel="noreferrer">
+                  <i class="ri-github-line" aria-hidden="true"></i>
+                  GitHub
+                </a>
+              </div>
+
+              <div class="divider"></div>
+
+              <button class="btn btn--ghost" type="button" data-scroll="#home">
+                Back to top <span class="mono" aria-hidden="true">↑</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="container footer__inner">
+          <span class="muted">© <span id="year"></span> Sahilpreet Singh</span>
+        </div>
+      </footer>
+
+      <!-- Notice Modal -->
+      <div class="modal" id="demoModal" hidden>
+        <div class="modal__backdrop" data-modal-close></div>
+
+        <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle">
+          <div class="modal__bar" aria-hidden="true">
+            <span class="dot yellow-dark"></span>
+            <span class="dot yellow"></span>
+            <span class="dot yellow-light"></span>
+            <span class="modal__title mono">~/notice</span>
+
+            <button class="icon-btn modal__close" type="button" aria-label="Close" data-modal-close>
+              <i class="ri-close-line" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="modal__body">
+            <h3 class="modal__heading" id="demoModalTitle">Live demo not hosted yet</h3>
+            <p class="muted modal__text">I’ll add a hosted demo soon.</p>
+
+            <div class="modal__actions">
+              <button class="btn btn--primary btn--small" type="button" data-modal-close>Got it</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
 
-    <div id="about-me" class="secondary-content_container">
-      <div class="secondary-content_div">
-        <div class="about-me_container">
-          <div class="about-me-header_div">
-            <h1>
-              <span>A</span><span>B</span><span>O</span><span>U</span><span>T</span><span>-</span><span>M</span><span>E</span>
-            </h1>
-          </div>
-
-          <div class="about-me-body_div">
-            <span>
-              I am <b>Sahil</b>, an experienced software developer with two years of practical industry experience.
-              Throughout my professional journey, I have had the privilege of working on diverse projects, honing my
-              skills in software development and problem-solving. I am currently in my <b>third year</b> of studying
-              <b>Computer Science</b> at <b>Anglia Ruskin University</b> (Cambridge), where I continue to expand my
-              horizons, collaborate with fellow students, and deepen my understanding of modern software engineering
-              practices and technologies.
-            </span>
-            <span>
-              The <b>prospect</b> of exploring different programming languages, methodologies, and problem-solving techniques
-              excites me, as it presents endless possibilities to create innovative and impactful solutions. If you would
-              like to <b>connect</b> with me and be a part of this exciting journey, please feel free to reach out to me on
-              <strong onclick="openLinkInNewTab(event, 'https://www.linkedin.com/in/sahilsingh021/')">LinkedIn</strong>.
-              I am eager to connect with like-minded professionals and share experiences and insights.
-            </span>
-
-            <span>I look forward to <b>connecting</b> with <b>you</b>!</span>
-          </div>
-        </div>
-
-        <div class="experience_container">
-          <div class="experience-header_div">
-            <h1>
-              <span>E</span><span>X</span><span>P</span><span>E</span><span>R</span><span>I</span><span>E</span><span>N</span><span>C</span><span>E</span>
-            </h1>
-          </div>
-
-          <div class="experience-body_div">
-            <div id="wrap">
-              <section id="wraped-section-1" class="wraped-section">
-                <h1><strong>Junior C# Consultant</strong> - Sparta Global</h1>
-                <h3>September 2022 – April 2023</h3>
-                <span>
-                  During my time at '<b>Sparta Global</b>', I underwent rigorous training in <b>.NET</b> software
-                  development, focusing on C#, ASP.NET, and SQL. Through weekly assessments, I continuously evaluated and
-                  improved my proficiency in these areas. The program presented challenging assignments and practical
-                  scenarios, allowing me to refine my problem-solving skills and gain a deep understanding of .NET concepts.
-                </span>
-                <br />
-                <span>
-                  This experience not only enhanced my technical capabilities but also fostered <b>collaboration</b>,
-                  <b>critical thinking</b>, and effective <b>problem-solving</b>. With a solid foundation in .NET development,
-                  I am well-equipped to deliver high-quality software solutions in professional settings.
-                </span>
-                <br />
-                <span>
-                  The program taught me industry best practices, task prioritization, efficient time management, and working
-                  under tight deadlines. This experience made me <b>flexible</b> and <b>agile</b> in software development,
-                  enabling me to deliver results in fast-paced and dynamic environments.
-                </span>
-              </section>
-
-              <section id="wraped-section-2" class="wraped-section">
-                <h1><strong>Junior Programmer</strong> - CMRRKAD System Ltd</h1>
-                <h3>August 2021 – August 2022</h3>
-                <span>
-                  My experience at <b>'CMRRKAD'</b> was a remarkable introduction to the professional world. Collaborating
-                  with a team of skilled developers on a web-based <b>HR tool</b> allowed me to gain practical insights into
-                  real-world software development. This opportunity not only enhanced my technical skills but also provided
-                  me with invaluable exposure to project management, collaboration, and teamwork.
-                </span>
-                <br />
-                <span>
-                  Contributing to the development of modules such as <b>Timesheet</b> and <b>Payroll</b>, gave me hands-on
-                  experience in building functional components of a complex system. I had the chance to work <b>closely with my team</b>
-                  to ensure the tool's efficiency, user-friendliness, and alignment with organizational goals. This experience
-                  taught me the importance of attention to detail, adherence to project requirements, and delivering high-quality solutions.
-                </span>
-                <br />
-                <span>
-                  Additionally, my responsibilities included conducting comprehensive testing to ensure compliance with
-                  <b>standards</b> and <b>regulations</b>. This process sharpened my ability to identify and address potential issues,
-                  ensuring a reliable and secure final product.
-                </span>
-              </section>
-            </div>
-
-            <div class="arrow-left-indicator" id="left-arrow">
-              <i class="ri-arrow-left-line"></i>
-            </div>
-            <div class="arrow-right-indicator" id="right-arrow">
-              <i class="ri-arrow-right-line"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="projects" class="third-content_container">
-      <div class="third-content_div">
-        <div class="projects-header_container">
-          <h1>
-            <span>P</span><span>R</span><span>O</span><span>J</span><span>E</span><span>C</span><span>T</span><span>S</span>
-          </h1>
-        </div>
-
-        <div class="projects-h3_container">
-          <h3>
-            All projects below can be found on my
-            <strong onclick="openLinkInNewTab(event, 'https://github.com/SahilSingh021');">GitHub</strong>.
-          </h3>
-        </div>
-
-        <div class="projects-content_container">
-          <div class="projects-content_div">
-            <div class="project_div" onclick="openLinkInNewTab(event, 'https://sahilsingh021.github.io/Meal-PrepSite/');">
-              <div class="image_div">
-                <img class="image" src="images/meal-prep-site_image.png" alt="Meal Prep project" loading="lazy" />
-              </div>
-              <div class="project-header_container">
-                <h1>Meal-Prep</h1>
-              </div>
-              <div class="project-body_container">
-                <span>
-                  This website utilizes the power of a free API to deliver comprehensive details about the user's selected cuisine.
-                  In addition to offering ingredients and step-by-step instructions, it enhances the cooking experience by incorporating
-                  an instructional video that guide users through the recipe preparation process.
-                </span>
-              </div>
-            </div>
-
-            <div class="project_div" onclick="openLinkInNewTab(event,'https://sahilsingh021.github.io/Weather-Site/')">
-              <div class="image_div">
-                <img class="image" src="images/weather-site_image.png" alt="Weather project" loading="lazy" />
-              </div>
-              <div class="project-header_container">
-                <h1>Weather Information</h1>
-              </div>
-              <div class="project-body_container">
-                <span>
-                  This website is my first web project, utilizing a free API to display valuable weather information for user-searched locations.
-                  Users can access current conditions, temperature, humidity, wind speed, and more. Stay informed about the weather with ease and convenience.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="contact-form" class="contact-container">
-      <div class="contact-div">
-        <h1><span>Contact Form</span></h1>
-        <form method="post" action="https://formspree.io/f/xnqyeboy">
-          <input type="text" name="name" placeholder="Your Name" required />
-          <input type="email" name="email" placeholder="Your Email" required />
-          <textarea name="message" placeholder="Your Message" required></textarea>
-          <input type="submit" value="SUBMIT" />
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <script src="js/script.js"></script>
-  <script>
-    VANTA.GLOBE({
-      el: ".main-content_container",
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 200.00,
-      minWidth: 200.00,
-      scale: 1.00,
-      scaleMobile: 1.00,
-      color: 0x959696,      // Line color
-      color2: 0xfacf0f  ,     // Dot color
-      backgroundColor: 0xf9fafa
-    })
-  </script>
-</body>
+    <script src="js/script.js"></script>
+  </body>
 </html>
