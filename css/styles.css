@@ -529,8 +529,9 @@ body.menu-open{overflow:hidden}
 .form label{display:grid;gap:8px;margin-bottom:12px}
 .form span{font-weight:900;color:var(--muted)}
 
-input,textarea{
+input, textarea{
   width:100%;
+  max-width:100%;
   padding:12px 12px;
   border-radius:14px;
   border:1px solid rgba(255,255,255,.10);
@@ -539,6 +540,19 @@ input,textarea{
   font-family:inherit;
   outline:none;
 }
+
+textarea{
+  min-height:160px;
+  max-height:260px;
+  resize:vertical;
+  overflow:auto;
+  scrollbar-width:none;
+}
+
+textarea::-webkit-scrollbar{
+  display:none;
+}
+
 input:focus,textarea:focus{
   border-color:rgba(240,196,25,.45);
   box-shadow:var(--ring);
