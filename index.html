@@ -190,7 +190,7 @@
                     <strong>Recreation Assistant</strong>
                     <span class="muted">Actihire (Part-time)</span>
                   </div>
-                  <div class="timeline-bottom muted">Nov 2025 – Present</div>
+                  <div class="timeline-bottom">Nov 2025 – Present</div>
                 </div>
 
                 <div class="timeline-item">
@@ -198,7 +198,7 @@
                     <strong>Junior C# Developer</strong>
                     <span class="muted">Sparta Global</span>
                   </div>
-                  <div class="timeline-bottom muted">Sep 2022 – Apr 2023</div>
+                  <div class="timeline-bottom">Sep 2022 – Apr 2023</div>
                 </div>
 
                 <div class="timeline-item">
@@ -206,7 +206,7 @@
                     <strong>Junior Programmer</strong>
                     <span class="muted">CMRRKAD System Ltd</span>
                   </div>
-                  <div class="timeline-bottom muted">Aug 2021 – Aug 2022</div>
+                  <div class="timeline-bottom">Aug 2021 – Aug 2022</div>
                 </div>
 
                 <div class="timeline-item">
@@ -214,7 +214,7 @@
                     <strong>Risk Review Consultant</strong>
                     <span class="muted">ReTRRAC Global</span>
                   </div>
-                  <div class="timeline-bottom muted">Jun 2022 – Jul 2022</div>
+                  <div class="timeline-bottom">Jun 2022 – Jul 2022</div>
                 </div>
               </div>
             </div>
@@ -227,100 +227,33 @@
         <div class="container">
           <div class="section-head">
             <h2><span class="mono">/</span> Projects</h2>
-            <p>Quality over quantity is the motto.</p>
+            <p>Selected work—clean, production-minded builds.</p>
           </div>
 
-          <article class="project-window">
-            <div class="project-window__bar" aria-hidden="true">
-              <span class="dot yellow-dark"></span>
-              <span class="dot yellow"></span>
-              <span class="dot yellow-light"></span>
-              <span class="project-window__title mono">~/projects/acsa</span>
+          <!-- Desktop carousel -->
+          <div class="projects-focus" aria-label="Project carousel">
+            <button class="proj-nav proj-nav--prev" type="button" aria-label="Previous project">
+              <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
+            </button>
+
+            <div class="projects-stage">
+              <div id="projectsGrid" class="projects-one" aria-live="polite"></div>
             </div>
 
-            <div class="project-window__body">
-              <header class="project-head">
-                <div>
-                  <h3 class="project-title">
-                    <span class="mono subtle">repo:</span>
-                    ACSA - AssaultCube Secure Arena
-                  </h3>
-                  <p class="muted project-sub">Final Year Project • platform integrity & anti-cheat</p>
-                </div>
-
-                <div class="project-meta">
-                  <span class="pill pill--green mono">ASP.NET</span>
-                  <span class="pill pill--green mono">C#</span>
-                  <span class="pill pill--green mono">c++</span>
-                </div>
-              </header>
-
-              <p class="project-desc">
-                An end-to-end competitive platform: the web app manages identity, accounts, and match hosting;
-                the anti-cheat DLL enforces integrity checks, logs suspicious activity, and connects to the
-                platform for authenticated play; and the forked AssaultCube client loads the anti-cheat at
-                startup.
-              </p>
-
-              <div class="components">
-                <section class="component">
-                  <div class="component__top">
-                    <span class="badge mono">01</span>
-                    <h4 class="component__title">Web Platform</h4>
-                  </div>
-                  <ul class="component__list">
-                    <li>ASP.NET Core (MVC/Razor)</li>
-                    <li>Microsoft Identity auth</li>
-                    <li>JWT sessions + match pooling</li>
-                    <li>Kestrel-hosted</li>
-                    <li>Clean UI</li>
-                  </ul>
-                </section>
-
-                <section class="component">
-                  <div class="component__top">
-                    <span class="badge mono">02</span>
-                    <h4 class="component__title">Anti-Cheat DLL (C++)</h4>
-                  </div>
-                  <ul class="component__list">
-                    <li>Debugger + remote debugger detection</li>
-                    <li>Module scanning + whitelist</li>
-                    <li>Logs suspicious / malicious activity</li>
-                    <li><span class="mono">.text</span> CRC32 baseline + monitor thread</li>
-                  </ul>
-                </section>
-
-                <section class="component">
-                  <div class="component__top">
-                    <span class="badge mono">03</span>
-                    <h4 class="component__title">Game Integration</h4>
-                  </div>
-                  <ul class="component__list">
-                    <li>Forked AssaultCube client</li>
-                    <li>Loads anti-cheat DLL at startup</li>
-                    <li>Communicates with anti-cheat for match initialization</li>
-                    <li>Delivers match results back to the anti-cheat</li>
-                  </ul>
-                </section>
-              </div>
-
-              <footer class="project-foot">
-                <ul class="tags tags--tight" aria-label="Topics">
-                  <li class="tag">Identity</li>
-                  <li class="tag">JWT</li>
-                  <li class="tag">Kestrel</li>
-                  <li class="tag">Anti-Cheat</li>
-                  <li class="tag">.dll</li>
-                </ul>
-
-                <div class="project-actions">
-                  <a class="btn btn--primary btn--small" href="#" id="liveDemoBtn">Live / Demo</a>
-                </div>
-              </footer>
+            <div class="projects-meta-row">
+              <div class="projects-dots" id="projectsDots" aria-label="Project pagination"></div>
+              <div class="projects-count mono" id="projectsCount"></div>
             </div>
-          </article>
 
-          <div class="center">
+            <button class="proj-nav proj-nav--next" type="button" aria-label="Next project">
+              <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <!-- Mobile list (all projects) -->
+          <div id="projectsList" class="projects-list" aria-label="Projects list"></div>
+
+          <div class="center" style="margin-top: 22px;">
             <a class="btn btn--ghost" href="https://github.com/SahilSingh021" target="_blank" rel="noreferrer">
               View GitHub <i class="ri-arrow-right-line" aria-hidden="true"></i>
             </a>

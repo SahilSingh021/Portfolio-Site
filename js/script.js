@@ -11,6 +11,7 @@
     contact: document.getElementById("contact"),
   };
 
+  // Mobile menu
   const setMenu = (open) => {
     if (!menuToggle || !mobileMenu) return;
     menuToggle.setAttribute("aria-expanded", String(open));
@@ -33,6 +34,7 @@
     });
   }
 
+  // Smooth scroll with header offset
   const getHeaderOffset = () => {
     const h = header ? header.getBoundingClientRect().height : 0;
     return Math.ceil(h + 10);
@@ -64,12 +66,13 @@
     history.replaceState(null, "", href);
   });
 
-  const setActive = (key) => {
+  // Active nav link highlight
+  const setActiveNav = (key) => {
     navLinks.forEach((a) => a.classList.toggle("is-active", a.dataset.nav === key));
   };
 
   const handleTopLock = () => {
-    if (window.scrollY < 30) setActive("home");
+    if (window.scrollY < 30) setActiveNav("home");
   };
 
   let observer = null;
@@ -88,10 +91,10 @@
         if (!visible) return;
 
         const id = visible.target.id;
-        if (id === "home") setActive("home");
-        else if (id === "about_sr") setActive("about");
-        else if (id === "projects") setActive("projects");
-        else if (id === "contact") setActive("contact");
+        if (id === "home") setActiveNav("home");
+        else if (id === "about_sr") setActiveNav("about");
+        else if (id === "projects") setActiveNav("projects");
+        else if (id === "contact") setActiveNav("contact");
       },
       {
         root: null,
@@ -115,14 +118,17 @@
 
   window.addEventListener("scroll", handleTopLock, { passive: true });
 
+  // Footer year
   const year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
 
-  const liveDemoBtn = document.getElementById("liveDemoBtn");
+  // Demo modal
   const demoModal = document.getElementById("demoModal");
+  let lastFocused = null;
 
   const openModal = () => {
     if (!demoModal) return;
+    lastFocused = document.activeElement;
     demoModal.hidden = false;
     document.body.classList.add("modal-open");
     const closeBtn = demoModal.querySelector("[data-modal-close]");
@@ -133,15 +139,10 @@
     if (!demoModal) return;
     demoModal.hidden = true;
     document.body.classList.remove("modal-open");
-    if (liveDemoBtn) liveDemoBtn.focus();
+    if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
   };
 
-  if (liveDemoBtn && demoModal) {
-    liveDemoBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      openModal();
-    });
-
+  if (demoModal) {
     demoModal.addEventListener("click", (e) => {
       if (e.target.closest("[data-modal-close]")) closeModal();
     });
@@ -150,4 +151,153 @@
       if (!demoModal.hidden && e.key === "Escape") closeModal();
     });
   }
+
+  // Projects data
+  const projects = [
+    {
+      title: "ACSA - AssaultCube Secure Arena",
+      subtitle: "Final Year Project • platform integrity & anti-cheat",
+      description:
+        "An end-to-end competitive platform: the web app manages identity, accounts, and match hosting; the anti-cheat DLL enforces integrity checks, logs suspicious activity, and connects to the platform for authenticated play; and the forked AssaultCube client loads the anti-cheat at startup.",
+      stack: ["ASP.NET", "C#", "C++"],
+      highlights: [
+        "Microsoft Identity + secure session flow",
+        "JWT auth between components",
+        "Kestrel-hosted web platform",
+        "Anti-cheat integrity checks + telemetry logging",
+      ],
+      tags: ["Identity", "JWT", "Kestrel", "Anti-Cheat", ".dll"],
+      links: { demo: null, repo: null },
+    }
+  ];
+
+  // Projects rendering
+  const projectsGrid = document.getElementById("projectsGrid");
+  const projectsList = document.getElementById("projectsList");
+  const dotsWrap = document.getElementById("projectsDots");
+  const countEl = document.getElementById("projectsCount");
+
+  const prevBtn = document.querySelector(".proj-nav--prev");
+  const nextBtn = document.querySelector(".proj-nav--next");
+
+  const escapeHtml = (s) =>
+    String(s)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+  const pill = (text) => `<span class="pill mono">${escapeHtml(text)}</span>`;
+  const tag = (text) => `<li class="tag">${escapeHtml(text)}</li>`;
+
+  const renderProjectCard = (p) => {
+    const stackHtml = (p.stack || []).map(pill).join("");
+    const highlightsHtml = (p.highlights || []).map((x) => `<li>${escapeHtml(x)}</li>`).join("");
+    const tagsHtml = (p.tags || []).map(tag).join("");
+
+    const demoBtn = p.links?.demo
+      ? `<a class="btn btn--primary btn--small" href="${escapeHtml(p.links.demo)}" target="_blank" rel="noreferrer">Live / Demo</a>`
+      : `<button class="btn btn--primary btn--small" type="button" data-open-demo-modal>Live / Demo</button>`;
+
+    const repoBtn = p.links?.repo
+      ? `<a class="btn btn--ghost btn--small" href="${escapeHtml(p.links.repo)}" target="_blank" rel="noreferrer">Repo</a>`
+      : "";
+
+    return `
+      <article class="project-card">
+        <div class="project-media" aria-hidden="true"></div>
+
+        <div class="project-body">
+          <div class="project-top">
+            <div>
+              <h3 class="project-title">${escapeHtml(p.title)}</h3>
+              <p class="project-sub">${escapeHtml(p.subtitle)}</p>
+            </div>
+            <div class="pills" aria-label="Tech stack">
+              ${stackHtml}
+            </div>
+          </div>
+
+          <p class="project-desc">${escapeHtml(p.description)}</p>
+
+          ${
+            highlightsHtml
+              ? `<ul class="project-highlights" aria-label="Highlights">${highlightsHtml}</ul>`
+              : ""
+          }
+        </div>
+
+        <div class="project-foot">
+          <ul class="tags" aria-label="Topics">${tagsHtml}</ul>
+
+          <div class="project-actions">
+            ${demoBtn}
+            ${repoBtn}
+          </div>
+        </div>
+      </article>
+    `;
+  };
+
+  const renderMobileList = () => {
+    if (!projectsList) return;
+    projectsList.innerHTML = projects.map(renderProjectCard).join("");
+
+    projectsList.querySelectorAll("[data-open-demo-modal]").forEach((btn) => {
+      btn.addEventListener("click", () => openModal());
+    });
+  };
+
+  let activeIndex = 0;
+
+  const renderDots = () => {
+    if (!dotsWrap) return;
+    dotsWrap.innerHTML = projects
+      .map((_, i) => {
+        const active = i === activeIndex ? "is-active" : "";
+        return `<button class="dot-btn ${active}" type="button" aria-label="Go to project ${i + 1}"></button>`;
+      })
+      .join("");
+
+    Array.from(dotsWrap.querySelectorAll(".dot-btn")).forEach((b, i) =>
+      b.addEventListener("click", () => setActiveProject(i))
+    );
+  };
+
+  const updateNavState = () => {
+    if (countEl) countEl.textContent = `${activeIndex + 1} / ${projects.length}`;
+    const disabled = projects.length <= 1;
+    if (prevBtn) prevBtn.disabled = disabled;
+    if (nextBtn) nextBtn.disabled = disabled;
+  };
+
+  const setActiveProject = (idx) => {
+    activeIndex = (idx + projects.length) % projects.length;
+
+    if (projectsGrid) {
+      projectsGrid.innerHTML = renderProjectCard(projects[activeIndex]);
+
+      const modalBtn = projectsGrid.querySelector("[data-open-demo-modal]");
+      if (modalBtn) modalBtn.addEventListener("click", () => openModal());
+    }
+
+    renderDots();
+    updateNavState();
+  };
+
+  if (prevBtn) prevBtn.addEventListener("click", () => setActiveProject(activeIndex - 1));
+  if (nextBtn) nextBtn.addEventListener("click", () => setActiveProject(activeIndex + 1));
+
+  document.addEventListener("keydown", (e) => {
+    const tag = document.activeElement?.tagName?.toLowerCase();
+    const typing = tag === "input" || tag === "textarea";
+    if (typing) return;
+
+    if (e.key === "ArrowLeft") setActiveProject(activeIndex - 1);
+    if (e.key === "ArrowRight") setActiveProject(activeIndex + 1);
+  });
+
+  renderMobileList();
+  if (projects.length && projectsGrid) setActiveProject(0);
 })();
