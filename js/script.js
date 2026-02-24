@@ -300,4 +300,13 @@
 
   renderMobileList();
   if (projects.length && projectsGrid) setActiveProject(0);
+
+  const container = document.querySelector(".bg-particles");
+  for (let i = 0; i < 30; i++) {
+    const dot = document.createElement("span");
+    dot.style.left = Math.random() * 100 + "vw";
+    dot.style.animationDuration = 8 + Math.random() * 100 + "s";
+    dot.style.opacity = Math.random();
+    container.appendChild(dot);
+  }
 })();
