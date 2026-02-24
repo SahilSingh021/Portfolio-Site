@@ -2,127 +2,166 @@
   const header = document.querySelector(".site-header");
   const menuToggle = document.getElementById("menuToggle");
   const mobileMenu = document.getElementById("mobileMenu");
-  const navLinks = Array.from(document.querySelectorAll(".nav__link"));
 
-  const sectionsByKey = {
-    home: document.getElementById("home"),
-    about: document.getElementById("about_sr"),
-    projects: document.getElementById("projects"),
-    contact: document.getElementById("contact"),
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const desktopMQ = window.matchMedia("(min-width: 981px)");
+
+  const navLinks = Array.from(document.querySelectorAll("[data-nav]")).filter(
+    (el) => el.tagName.toLowerCase() === "a"
+  );
+
+  const sections = [
+    { key: "home", el: document.getElementById("home") },
+    { key: "about", el: document.getElementById("about_sr") },
+    { key: "projects", el: document.getElementById("projects") },
+    { key: "contact", el: document.getElementById("contact") },
+  ].filter((s) => s.el);
+
+  const getHeaderOffset = () => (header ? Math.ceil(header.getBoundingClientRect().height + 10) : 10);
+
+  const setHeaderState = () => {
+    if (!header) return;
+    header.classList.toggle("is-scrolled", window.scrollY > 10);
   };
 
-  // Mobile menu
-  const setMenu = (open) => {
+  const setActiveNav = (key) => {
+    navLinks.forEach((a) => a.classList.toggle("is-active", a.dataset.nav === key));
+    const mobileLinks = mobileMenu ? Array.from(mobileMenu.querySelectorAll("[data-nav]")) : [];
+    mobileLinks.forEach((a) => a.classList.toggle("is-active", a.dataset.nav === key));
+  };
+
+  const openMenu = () => {
     if (!menuToggle || !mobileMenu) return;
-    menuToggle.setAttribute("aria-expanded", String(open));
-    mobileMenu.hidden = !open;
-    document.body.classList.toggle("menu-open", open);
+    menuToggle.setAttribute("aria-expanded", "true");
+    mobileMenu.hidden = false;
+    document.body.classList.add("menu-open");
+    requestAnimationFrame(() => mobileMenu.classList.add("is-open"));
   };
 
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener("click", () => {
-      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-      setMenu(!isOpen);
-    });
-
-    mobileMenu.addEventListener("click", (e) => {
-      if (e.target.closest("a")) setMenu(false);
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setMenu(false);
-    });
-  }
-
-  // Smooth scroll with header offset
-  const getHeaderOffset = () => {
-    const h = header ? header.getBoundingClientRect().height : 0;
-    return Math.ceil(h + 10);
+  const closeMenu = (instant = false) => {
+    if (!menuToggle || !mobileMenu) return;
+    menuToggle.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("menu-open");
+    mobileMenu.classList.remove("is-open");
+    const dur = instant || prefersReduced ? 0 : 280;
+    window.setTimeout(() => {
+      mobileMenu.hidden = true;
+    }, dur);
   };
 
-  const scrollToSelector = (selector) => {
-    const el = document.querySelector(selector);
+  const toggleMenu = () => {
+    const isOpen = menuToggle?.getAttribute("aria-expanded") === "true";
+    if (isOpen) closeMenu();
+    else openMenu();
+  };
+
+  const scrollToEl = (el) => {
     if (!el) return;
     const y = window.scrollY + el.getBoundingClientRect().top - getHeaderOffset();
-    window.scrollTo({ top: y, behavior: "smooth" });
+    window.scrollTo({ top: y, behavior: prefersReduced ? "auto" : "smooth" });
   };
 
+  // Anchor navigation
   document.addEventListener("click", (e) => {
-    const scrollBtn = e.target.closest("[data-scroll]");
-    if (scrollBtn) {
-      e.preventDefault();
-      scrollToSelector(scrollBtn.getAttribute("data-scroll"));
-      return;
-    }
-
     const anchor = e.target.closest('a[href^="#"]');
     if (!anchor) return;
 
     const href = anchor.getAttribute("href");
     if (!href || href === "#") return;
 
+    const target = document.querySelector(href);
+    if (!target) return;
+
     e.preventDefault();
-    scrollToSelector(href);
+    scrollToEl(target);
+
+    const key = anchor.dataset.nav || (href === "#about_sr" ? "about" : href.replace("#", ""));
+    if (key) setActiveNav(key);
+
     history.replaceState(null, "", href);
+
+    if (mobileMenu && !mobileMenu.hidden) closeMenu();
   });
 
-  // Active nav link highlight
-  const setActiveNav = (key) => {
-    navLinks.forEach((a) => a.classList.toggle("is-active", a.dataset.nav === key));
+  // menu wiring
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", toggleMenu);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu(true);
+    });
+  }
+
+  const syncMenuForViewport = () => {
+    if (desktopMQ.matches) closeMenu(true);
+  };
+  desktopMQ.addEventListener?.("change", syncMenuForViewport) || desktopMQ.addListener(syncMenuForViewport);
+
+  // scroll spy
+  let cached = [];
+  const recalcSectionTops = () => {
+    const off = getHeaderOffset();
+    cached = sections
+      .map((s) => ({ key: s.key, top: Math.floor(s.el.getBoundingClientRect().top + window.scrollY - off) }))
+      .sort((a, b) => a.top - b.top);
   };
 
-  const handleTopLock = () => {
-    if (window.scrollY < 30) setActiveNav("home");
+  const getActiveKeyFromScroll = () => {
+    const bottomGap = 2;
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - bottomGap;
+    if (atBottom) return cached[cached.length - 1]?.key || "contact";
+
+    const pos = window.scrollY + getHeaderOffset() + 2;
+    let active = cached[0]?.key || "home";
+    for (let i = 0; i < cached.length; i++) {
+      if (pos >= cached[i].top) active = cached[i].key;
+      else break;
+    }
+    return active;
   };
 
-  let observer = null;
+  let ticking = false;
+  const onScroll = () => {
+    setHeaderState();
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      setActiveNav(getActiveKeyFromScroll());
+    });
+  };
 
-  const makeObserver = () => {
-    if (observer) observer.disconnect();
-
-    const rootMargin = `-${getHeaderOffset()}px 0px -60% 0px`;
-
-    observer = new IntersectionObserver(
+  // reveal animations
+  const revealEls = Array.from(document.querySelectorAll(".reveal"));
+  if (!prefersReduced) {
+    const revealObserver = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((x) => x.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-        if (!visible) return;
-
-        const id = visible.target.id;
-        if (id === "home") setActiveNav("home");
-        else if (id === "about_sr") setActiveNav("about");
-        else if (id === "projects") setActiveNav("projects");
-        else if (id === "contact") setActiveNav("contact");
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          revealObserver.unobserve(entry.target);
+        });
       },
-      {
-        root: null,
-        threshold: [0.18, 0.3, 0.45, 0.6],
-        rootMargin,
-      }
+      { threshold: 0.18, rootMargin: "0px 0px -10% 0px" }
     );
 
-    Object.values(sectionsByKey)
-      .filter(Boolean)
-      .forEach((sec) => observer.observe(sec));
-  };
+    let bucket = 0;
+    revealEls.forEach((el) => {
+      if (el.hasAttribute("data-stagger")) {
+        const d = Math.min(420, (bucket % 8) * 55);
+        el.style.setProperty("--d", `${d}ms`);
+        bucket++;
+      }
+      revealObserver.observe(el);
+    });
+  } else {
+    revealEls.forEach((el) => el.classList.add("is-in"));
+  }
 
-  makeObserver();
-  handleTopLock();
-
-  window.addEventListener("resize", () => {
-    makeObserver();
-    handleTopLock();
-  });
-
-  window.addEventListener("scroll", handleTopLock, { passive: true });
-
-  // Footer year
+  // year
   const year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
 
-  // Demo modal
+  // modal
   const demoModal = document.getElementById("demoModal");
   let lastFocused = null;
 
@@ -131,28 +170,26 @@
     lastFocused = document.activeElement;
     demoModal.hidden = false;
     document.body.classList.add("modal-open");
-    const closeBtn = demoModal.querySelector("[data-modal-close]");
-    if (closeBtn) closeBtn.focus();
+    demoModal.querySelector("[data-modal-close]")?.focus();
   };
 
   const closeModal = () => {
     if (!demoModal) return;
     demoModal.hidden = true;
     document.body.classList.remove("modal-open");
-    if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+    lastFocused?.focus?.();
   };
 
   if (demoModal) {
     demoModal.addEventListener("click", (e) => {
       if (e.target.closest("[data-modal-close]")) closeModal();
     });
-
     document.addEventListener("keydown", (e) => {
       if (!demoModal.hidden && e.key === "Escape") closeModal();
     });
   }
 
-  // Projects data
+  // projects
   const projects = [
     {
       title: "ACSA - AssaultCube Secure Arena",
@@ -168,15 +205,13 @@
       ],
       tags: ["Identity", "JWT", "Kestrel", "Anti-Cheat", ".dll"],
       links: { demo: null, repo: null },
-    }
+    },
   ];
 
-  // Projects rendering
   const projectsGrid = document.getElementById("projectsGrid");
   const projectsList = document.getElementById("projectsList");
   const dotsWrap = document.getElementById("projectsDots");
   const countEl = document.getElementById("projectsCount");
-
   const prevBtn = document.querySelector(".proj-nav--prev");
   const nextBtn = document.querySelector(".proj-nav--next");
 
@@ -205,7 +240,7 @@
       : "";
 
     return `
-      <article class="project-card">
+      <article class="project-card project-swap-in">
         <div class="project-media" aria-hidden="true"></div>
 
         <div class="project-body">
@@ -214,39 +249,29 @@
               <h3 class="project-title">${escapeHtml(p.title)}</h3>
               <p class="project-sub">${escapeHtml(p.subtitle)}</p>
             </div>
-            <div class="pills" aria-label="Tech stack">
-              ${stackHtml}
-            </div>
+            <div class="pills" aria-label="Tech stack">${stackHtml}</div>
           </div>
 
           <p class="project-desc">${escapeHtml(p.description)}</p>
-
-          ${
-            highlightsHtml
-              ? `<ul class="project-highlights" aria-label="Highlights">${highlightsHtml}</ul>`
-              : ""
-          }
+          ${highlightsHtml ? `<ul class="project-highlights" aria-label="Highlights">${highlightsHtml}</ul>` : ""}
         </div>
 
         <div class="project-foot">
           <ul class="tags" aria-label="Topics">${tagsHtml}</ul>
-
-          <div class="project-actions">
-            ${demoBtn}
-            ${repoBtn}
-          </div>
+          <div class="project-actions">${demoBtn}${repoBtn}</div>
         </div>
       </article>
     `;
   };
 
+  const bindModalButtons = (root) => {
+    root.querySelectorAll("[data-open-demo-modal]").forEach((btn) => btn.addEventListener("click", openModal));
+  };
+
   const renderMobileList = () => {
     if (!projectsList) return;
     projectsList.innerHTML = projects.map(renderProjectCard).join("");
-
-    projectsList.querySelectorAll("[data-open-demo-modal]").forEach((btn) => {
-      btn.addEventListener("click", () => openModal());
-    });
+    bindModalButtons(projectsList);
   };
 
   let activeIndex = 0;
@@ -277,36 +302,54 @@
 
     if (projectsGrid) {
       projectsGrid.innerHTML = renderProjectCard(projects[activeIndex]);
-
-      const modalBtn = projectsGrid.querySelector("[data-open-demo-modal]");
-      if (modalBtn) modalBtn.addEventListener("click", () => openModal());
+      bindModalButtons(projectsGrid);
     }
 
     renderDots();
     updateNavState();
   };
 
-  if (prevBtn) prevBtn.addEventListener("click", () => setActiveProject(activeIndex - 1));
-  if (nextBtn) nextBtn.addEventListener("click", () => setActiveProject(activeIndex + 1));
+  prevBtn?.addEventListener("click", () => setActiveProject(activeIndex - 1));
+  nextBtn?.addEventListener("click", () => setActiveProject(activeIndex + 1));
 
   document.addEventListener("keydown", (e) => {
-    const tag = document.activeElement?.tagName?.toLowerCase();
-    const typing = tag === "input" || tag === "textarea";
+    const tagName = document.activeElement?.tagName?.toLowerCase();
+    const typing = tagName === "input" || tagName === "textarea";
     if (typing) return;
-
     if (e.key === "ArrowLeft") setActiveProject(activeIndex - 1);
     if (e.key === "ArrowRight") setActiveProject(activeIndex + 1);
   });
 
+  // particles
+  const particlesContainer = document.querySelector(".bg-particles");
+  if (particlesContainer) {
+    for (let i = 0; i < 30; i++) {
+      const dot = document.createElement("span");
+      dot.style.left = Math.random() * 100 + "vw";
+      dot.style.animationDuration = 8 + Math.random() * 100 + "s";
+      dot.style.opacity = String(0.25 + Math.random() * 0.75);
+      particlesContainer.appendChild(dot);
+    }
+  }
+
+  // init
+  recalcSectionTops();
+  setHeaderState();
+  setActiveNav(getActiveKeyFromScroll());
+  syncMenuForViewport();
+
   renderMobileList();
   if (projects.length && projectsGrid) setActiveProject(0);
 
-  const container = document.querySelector(".bg-particles");
-  for (let i = 0; i < 30; i++) {
-    const dot = document.createElement("span");
-    dot.style.left = Math.random() * 100 + "vw";
-    dot.style.animationDuration = 8 + Math.random() * 100 + "s";
-    dot.style.opacity = Math.random();
-    container.appendChild(dot);
-  }
+  window.addEventListener("load", () => {
+    recalcSectionTops();
+    setActiveNav(getActiveKeyFromScroll());
+  });
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", () => {
+    recalcSectionTops();
+    setActiveNav(getActiveKeyFromScroll());
+    syncMenuForViewport();
+  });
 })();
