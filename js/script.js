@@ -204,7 +204,7 @@
         "Anti-cheat integrity checks + telemetry logging",
       ],
       tags: ["Identity", "JWT", "Kestrel", "Anti-Cheat", ".dll"],
-      links: { demo: null, repo: null },
+      links: { demo: null, repo: "https://github.com/SahilSingh021/acsa-showcase" },
     },
   ];
 
