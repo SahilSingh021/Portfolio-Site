@@ -139,8 +139,8 @@ a{color:inherit}
 /* reveal animations */
 .reveal{
   opacity:0;
-  transform:translateY(12px);
-  transition:opacity var(--dur3) var(--ease),transform var(--dur3) var(--ease);
+  transform:translateY(20px);
+  transition:opacity 500ms cubic-bezier(.22,1,.36,1),transform 500ms cubic-bezier(.22,1,.36,1);
   will-change:transform,opacity;
 }
 .reveal.is-in{opacity:1;transform:translateY(0)}
