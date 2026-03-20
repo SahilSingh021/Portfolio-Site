@@ -1,4 +1,26 @@
 (() => {
+  // Theme toggle
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon   = document.getElementById("themeIcon");
+
+  const applyTheme = (theme) => {
+    document.documentElement.setAttribute("data-theme", theme);
+    if (themeIcon) {
+      themeIcon.className = theme === "dark" ? "ri-sun-line" : "ri-moon-line";
+    }
+    localStorage.setItem("theme", theme);
+  };
+
+  // match icon to current theme
+  const initialTheme = document.documentElement.getAttribute("data-theme") || "light";
+  applyTheme(initialTheme);
+
+  themeToggle?.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme");
+    applyTheme(current === "dark" ? "light" : "dark");
+  });
+
+  // Main site logic
   const header = document.querySelector(".site-header");
   const menuToggle = document.getElementById("menuToggle");
   const mobileMenu = document.getElementById("mobileMenu");
@@ -11,10 +33,12 @@
   );
 
   const sections = [
-    { key: "home", el: document.getElementById("home") },
-    { key: "about", el: document.getElementById("about_sr") },
-    { key: "projects", el: document.getElementById("projects") },
-    { key: "contact", el: document.getElementById("contact") },
+    { key: "home",       el: document.getElementById("home") },
+    { key: "about",      el: document.getElementById("about") },
+    { key: "skills",     el: document.getElementById("skills") },
+    { key: "experience", el: document.getElementById("experience") },
+    { key: "projects",   el: document.getElementById("projects") },
+    { key: "contact",    el: document.getElementById("contact") },
   ].filter((s) => s.el);
 
   const getHeaderOffset = () => (header ? Math.ceil(header.getBoundingClientRect().height + 10) : 10);
@@ -75,7 +99,7 @@
     e.preventDefault();
     scrollToEl(target);
 
-    const key = anchor.dataset.nav || (href === "#about_sr" ? "about" : href.replace("#", ""));
+    const key = anchor.dataset.nav || href.replace("#", "");
     if (key) setActiveNav(key);
 
     history.replaceState(null, "", href);
@@ -226,39 +250,41 @@
   const pill = (text) => `<span class="pill mono">${escapeHtml(text)}</span>`;
   const tag = (text) => `<li class="tag">${escapeHtml(text)}</li>`;
 
-  const renderProjectCard = (p) => {
+  const renderProjectCard = (p, idx) => {
     const stackHtml = (p.stack || []).map(pill).join("");
     const highlightsHtml = (p.highlights || []).map((x) => `<li>${escapeHtml(x)}</li>`).join("");
     const tagsHtml = (p.tags || []).map(tag).join("");
+    const num = String((idx ?? 0) + 1).padStart(2, "0");
 
     const demoBtn = p.links?.demo
-      ? `<a class="btn btn--primary btn--small" href="${escapeHtml(p.links.demo)}" target="_blank" rel="noreferrer">Live / Demo</a>`
-      : `<button class="btn btn--primary btn--small" type="button" data-open-demo-modal>Live / Demo</button>`;
+      ? `<a class="btn btn--primary btn--small" href="${escapeHtml(p.links.demo)}" target="_blank" rel="noreferrer"><i class="ri-external-link-line" aria-hidden="true"></i> Live Demo</a>`
+      : `<button class="btn btn--primary btn--small" type="button" data-open-demo-modal><i class="ri-play-circle-line" aria-hidden="true"></i> Live Demo</button>`;
 
     const repoBtn = p.links?.repo
-      ? `<a class="btn btn--ghost btn--small" href="${escapeHtml(p.links.repo)}" target="_blank" rel="noreferrer">Repo</a>`
+      ? `<a class="btn btn--ghost btn--small" href="${escapeHtml(p.links.repo)}" target="_blank" rel="noreferrer"><i class="ri-github-line" aria-hidden="true"></i> Repo</a>`
       : "";
 
     return `
       <article class="project-card project-swap-in">
-        <div class="project-media" aria-hidden="true"></div>
+        <div class="pc-wrap">
 
-        <div class="project-body">
-          <div class="project-top">
-            <div>
-              <h3 class="project-title">${escapeHtml(p.title)}</h3>
-              <p class="project-sub">${escapeHtml(p.subtitle)}</p>
-            </div>
-            <div class="pills" aria-label="Tech stack">${stackHtml}</div>
+          <!-- left accent column -->
+          <div class="pc-col-left">
+            <span class="pc-num mono">${num}</span>
+            <div class="pc-stack">${stackHtml}</div>
+            <div class="pc-cta">${demoBtn}${repoBtn}</div>
           </div>
 
-          <p class="project-desc">${escapeHtml(p.description)}</p>
-          ${highlightsHtml ? `<ul class="project-highlights" aria-label="Highlights">${highlightsHtml}</ul>` : ""}
-        </div>
+          <!-- right content column -->
+          <div class="pc-col-right">
+            <div class="pc-eyebrow mono">Featured Project</div>
+            <h3 class="pc-title">${escapeHtml(p.title)}</h3>
+            <p class="pc-sub">${escapeHtml(p.subtitle)}</p>
+            <p class="pc-desc">${escapeHtml(p.description)}</p>
+            ${highlightsHtml ? `<ul class="pc-highlights">${highlightsHtml}</ul>` : ""}
+            <ul class="pc-tags">${tagsHtml}</ul>
+          </div>
 
-        <div class="project-foot">
-          <ul class="tags" aria-label="Topics">${tagsHtml}</ul>
-          <div class="project-actions">${demoBtn}${repoBtn}</div>
         </div>
       </article>
     `;
@@ -270,7 +296,7 @@
 
   const renderMobileList = () => {
     if (!projectsList) return;
-    projectsList.innerHTML = projects.map(renderProjectCard).join("");
+    projectsList.innerHTML = projects.map((p, i) => renderProjectCard(p, i)).join("");
     bindModalButtons(projectsList);
   };
 
@@ -301,7 +327,7 @@
     activeIndex = (idx + projects.length) % projects.length;
 
     if (projectsGrid) {
-      projectsGrid.innerHTML = renderProjectCard(projects[activeIndex]);
+      projectsGrid.innerHTML = renderProjectCard(projects[activeIndex], activeIndex);
       bindModalButtons(projectsGrid);
     }
 
@@ -320,16 +346,94 @@
     if (e.key === "ArrowRight") setActiveProject(activeIndex + 1);
   });
 
-  // particles
-  const particlesContainer = document.querySelector(".bg-particles");
-  if (particlesContainer) {
-    for (let i = 0; i < 30; i++) {
-      const dot = document.createElement("span");
-      dot.style.left = Math.random() * 100 + "vw";
-      dot.style.animationDuration = 8 + Math.random() * 100 + "s";
-      dot.style.opacity = String(0.25 + Math.random() * 0.75);
-      particlesContainer.appendChild(dot);
+  // typewriter
+  function initTypewriter() {
+    const el = document.querySelector(".hero-desc");
+    if (!el || prefersReduced) {
+        return;
     }
+
+    const phrases = [
+      "I build practical software and web experiences.",
+      "I write C# backends, REST APIs, and .NET systems.",
+      "I work at the binary level: C++ and x86 assembly.",
+      "I build anti-cheat systems and competitive platforms.",
+    ];
+
+    el.innerHTML = '<span class="tw-text"></span><span class="tw-cursor" aria-hidden="true"></span>';
+    const twText = el.querySelector(".tw-text");
+
+    let pi = 0, ci = 0, deleting = false;
+    const TYPE  = 44;   // ms per character while typing
+    const DEL   = 20;   // ms per character while deleting
+    const HOLD  = 2000; // pause after phrase is fully typed
+    const REST  = 380;  // pause after phrase is fully deleted
+
+    function tick() {
+      const phrase = phrases[pi];
+      if (!deleting) {
+        ci++;
+        twText.textContent = phrase.slice(0, ci);
+        if (ci === phrase.length) {
+          deleting = true;
+          setTimeout(tick, HOLD);
+          return;
+        }
+        setTimeout(tick, TYPE);
+      } else {
+        ci--;
+        twText.textContent = phrase.slice(0, ci);
+        if (ci === 0) {
+          deleting = false;
+          pi = (pi + 1) % phrases.length;
+          setTimeout(tick, REST);
+          return;
+        }
+        setTimeout(tick, DEL);
+      }
+    }
+
+    // slight delay so the reveal animation finishes first
+    setTimeout(tick, 700);
+  }
+
+  // ticker
+  function initTicker() {
+    const wrap = document.querySelector(".ticker-wrap");
+    const orig = document.querySelector(".ticker-track");
+    if (!wrap || !orig || prefersReduced) return;
+
+    // wrap > inner > [orig + clones]
+    const inner = document.createElement("div");
+    inner.className = "ticker-inner";
+    wrap.appendChild(inner);
+    inner.appendChild(orig); // move original into inner
+
+    // measure after fonts load so we get the real width
+    const trackW = orig.offsetWidth;
+    if (!trackW) return;
+
+    // enough copies to cover 3x the viewport
+    const totalNeeded = Math.max(2, Math.ceil((window.innerWidth * 3) / trackW) + 1);
+    for (let i = 1; i < totalNeeded; i++) {
+      inner.appendChild(orig.cloneNode(true));
+    }
+
+    let pos     = 0;
+    let running = true;
+    const SPEED = 0.8; // px per frame at 60 fps ≈ 48 px/s
+
+    wrap.addEventListener("mouseenter", () => running = false);
+    wrap.addEventListener("mouseleave",  () => running = true);
+
+    (function tick() {
+      if (running) {
+        pos -= SPEED;
+        if (pos <= -trackW) pos += trackW;
+        inner.style.transform = `translateX(${pos}px)`;
+      }
+      requestAnimationFrame(tick);
+    })();
   }
 
   // init
@@ -338,12 +442,14 @@
   setActiveNav(getActiveKeyFromScroll());
   syncMenuForViewport();
 
+  initTypewriter();
   renderMobileList();
   if (projects.length && projectsGrid) setActiveProject(0);
 
   window.addEventListener("load", () => {
     recalcSectionTops();
     setActiveNav(getActiveKeyFromScroll());
+    initTicker();
   });
 
   window.addEventListener("scroll", onScroll, { passive: true });

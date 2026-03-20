@@ -5,217 +5,314 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sahilpreet Singh | Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Cpath d='M8 11l5 5-5 5M15 21h9' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- prevent flash of wrong theme -->
+    <script>
+      (function(){
+        var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+        if(t==='dark')document.documentElement.setAttribute('data-theme','dark');
+      })();
+    </script>
   </head>
 
   <body>
+    <!-- HEADER -->
     <header class="site-header" id="top">
       <div class="container nav">
         <a class="brand" href="#home" data-nav="home" aria-label="Go to home">
-          <span class="brand__mark" aria-hidden="true"></span>
+          <img class="brand__avatar" src="images/profile_pic.jpg" alt="Sahilpreet Singh" />
           <span class="brand__name">SAHILPREET SINGH</span>
         </a>
 
         <nav class="nav__links" aria-label="Primary">
-          <a class="nav__link" href="#home" data-nav="home">Home</a>
-          <a class="nav__link" href="#about_sr" data-nav="about">About</a>
-          <a class="nav__link" href="#projects" data-nav="projects">Projects</a>
-          <a class="nav__link" href="#contact" data-nav="contact">Contact</a>
+          <a class="nav__link" href="#home"       data-nav="home">Home</a>
+          <a class="nav__link" href="#about"       data-nav="about">About</a>
+          <a class="nav__link" href="#skills"      data-nav="skills">Skills</a>
+          <a class="nav__link" href="#experience"  data-nav="experience">Experience</a>
+          <a class="nav__link" href="#projects"    data-nav="projects">Projects</a>
+          <a class="nav__link" href="#contact"     data-nav="contact">Contact</a>
         </nav>
 
         <div class="nav__actions">
-          <button
-            class="icon-btn nav__burger"
-            id="menuToggle"
-            type="button"
-            aria-label="Open menu"
-            aria-expanded="false"
-          >
+          <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+            <i class="ri-moon-line" aria-hidden="true" id="themeIcon"></i>
+          </button>
+          <button class="icon-btn nav__burger" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">
             <i class="ri-menu-3-line" aria-hidden="true"></i>
           </button>
         </div>
       </div>
 
       <div class="mobile-menu" id="mobileMenu" hidden>
-        <a class="mobile-menu__link" href="#home" data-nav="home">Home</a>
-        <a class="mobile-menu__link" href="#about_sr" data-nav="about">About</a>
-        <a class="mobile-menu__link" href="#projects" data-nav="projects">Projects</a>
-        <a class="mobile-menu__link" href="#contact" data-nav="contact">Contact</a>
+        <a class="mobile-menu__link" href="#home"      data-nav="home">Home</a>
+        <a class="mobile-menu__link" href="#about"      data-nav="about">About</a>
+        <a class="mobile-menu__link" href="#skills"     data-nav="skills">Skills</a>
+        <a class="mobile-menu__link" href="#experience" data-nav="experience">Experience</a>
+        <a class="mobile-menu__link" href="#projects"   data-nav="projects">Projects</a>
+        <a class="mobile-menu__link" href="#contact"    data-nav="contact">Contact</a>
       </div>
     </header>
 
     <main id="main">
-      <section id="home" class="section hero" data-stagger>
-        <div class="container hero__grid">
-          <div class="hero__content reveal" data-stagger>
-            <p class="terminal-pill reveal" data-stagger>
-              <span class="terminal-prefix">$</span>
-              <span class="terminal-text">whoami</span>
-              <span class="terminal-result">→ Software Developer</span>
-              <span class="terminal-cursor" aria-hidden="true"></span>
+
+      <!-- HERO -->
+      <section id="home" class="hero" data-stagger>
+        <div class="container hero-inner">
+
+          <div class="hero-badge reveal" data-stagger>
+            <span class="badge-pulse"></span>
+            Software Developer
+          </div>
+
+          <h1 class="display-name reveal" data-stagger>
+            Sahilpreet<br><span>Singh<span class="name-dot">.</span></span>
+          </h1>
+
+          <div class="hero-footer reveal" data-stagger>
+            <p class="hero-desc">
+              I build practical software and web experiences that are clean,
+              reliable, and easy to use.
             </p>
-
-            <h1 class="hero__title reveal" data-stagger>Hi, I’m <span class="accent">Sahil</span>.</h1>
-
-            <p class="hero__subtitle reveal" data-stagger>
-              I build practical software and web experiences that are clean, reliable, and easy to use.
-            </p>
-
-            <div class="hero__cta reveal" data-stagger>
-              <a class="btn btn--primary" href="#projects">
-                <span class="btn__icon" aria-hidden="true">↳</span>
-                View Projects
-              </a>
-              <a class="btn btn--ghost" href="#contact">
-                <span class="btn__icon" aria-hidden="true">✉</span>
-                Contact
-              </a>
-            </div>
-
-            <div class="hero__meta reveal" data-stagger>
-              <a
-                class="meta-link"
-                href="https://www.linkedin.com/in/sahilsingh021/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <i class="ri-linkedin-box-line" aria-hidden="true"></i>
-                LinkedIn
+            <div class="hero-actions">
+              <a class="btn btn--primary" href="#projects">View Projects</a>
+              <a class="btn btn--ghost"   href="#contact">Get In Touch</a>
+              <a class="meta-link" href="https://www.linkedin.com/in/sahilsingh021/" target="_blank" rel="noreferrer">
+                <i class="ri-linkedin-box-line" aria-hidden="true"></i>LinkedIn
               </a>
               <a class="meta-link" href="https://github.com/SahilSingh021" target="_blank" rel="noreferrer">
-                <i class="ri-github-line" aria-hidden="true"></i>
-                GitHub
+                <i class="ri-github-line" aria-hidden="true"></i>GitHub
               </a>
             </div>
           </div>
-
-          <aside class="terminal-card reveal" data-stagger>
-            <div class="terminal-bar" aria-hidden="true">
-              <span class="dot yellow-dark"></span>
-              <span class="dot yellow"></span>
-              <span class="dot yellow-light"></span>
-              <span class="terminal-title">~/skills</span>
-            </div>
-
-            <div class="terminal-body">
-              <ul class="terminal-list">
-                <li><span class="bullet">•</span> C#, C++, SQL</li>
-                <li><span class="bullet">•</span> Web apps & APIs</li>
-                <li><span class="bullet">•</span> Low-level debugging</li>
-                <li><span class="bullet">•</span> x86/x64 Assembly & Reversing</li>
-              </ul>
-
-              <div class="divider"></div>
-
-              <p class="small muted">I build maintainable, production-ready software that stays reliable.</p>
-            </div>
-          </aside>
         </div>
+
       </section>
 
-      <section class="section" data-stagger>
+      <!-- TICKER -->
+      <div class="ticker-wrap" aria-hidden="true">
+        <div class="ticker-track">
+          <span class="ticker-item">C#</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">C++</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">SQL</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">ASP.NET</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">x86 Assembly</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Web APIs</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">.NET</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">JavaScript</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Git</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">JWT</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">WinDbg</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Kestrel</span><span class="ticker-sep">·</span>
+        </div>
+      </div>
+
+      <!-- ABOUT -->
+      <section id="about" class="section section-alt">
         <div class="container">
-          <div class="section-head reveal" id="about_sr" data-stagger>
-            <h2><span class="mono">/</span> About</h2>
-            <p>
-              Software developer with industry experience and a strong interest in building practical,
-              effective digital solutions.
-            </p>
+          <div class="section-header reveal" data-stagger>
+            <div class="section-label">01 / About</div>
+            <h2 class="section-title">Who I Am</h2>
           </div>
-
-          <div class="grid-2">
-            <div class="panel-stack">
-              <div class="panel reveal" data-stagger>
-                <h3 class="panel__title"><span class="mono">></span> Summary</h3>
-                <p>
-                  I enjoy solving problems and delivering clear, reliable results, even when deadlines are
-                  tight. I work well independently and in teams, and I’m always learning new tools and
-                  trying to improve myself.
-                </p>
-                <p>
-                  Right now I’m focused on sharpening my engineering fundamentals and building projects that
-                  feel genuinely professional.
-                </p>
-              </div>
-
-              <div class="panel reveal" data-stagger>
-                <h3 class="panel__title"><span class="mono">></span> Education</h3>
-
-                <div class="edu-item reveal" data-stagger>
-                  <div class="edu-top">
-                    <strong>Anglia Ruskin University</strong>
-                    <span class="muted">BSc Computer Science (Year 3)</span>
-                  </div>
-                </div>
-
-                <div class="edu-item reveal" data-stagger>
-                  <div class="edu-top">
-                    <strong>New City College</strong>
-                    <span class="muted">Information Technology</span>
-                  </div>
-                </div>
-              </div>
+          <div class="about-grid">
+            <div class="about-text reveal" data-stagger>
+              <p>I'm <strong>Sahilpreet Singh</strong> (Sahil), a software developer in my final year of <strong>BSc Computer Science at Anglia Ruskin University</strong>. I enjoy building software that actually works well and is easy to maintain, from web platforms to things that run much closer to the metal.</p>
+              <p>My background covers C# backend development and REST APIs, picking up real-world experience at Sparta Global, as well as low-level work in C++ and x86/x64 assembly through both university and personal projects.</p>
+              <p>My final year project is <strong>ACSA</strong>, a competitive gaming platform with a custom anti-cheat system built in C++ and a web platform in ASP.NET Core. It brings together most of what I know into one real system.</p>
             </div>
-
-            <div class="panel reveal" data-stagger>
-              <h3 class="panel__title"><span class="mono">></span> Experience</h3>
-
-              <div class="timeline">
-                <div class="timeline-item reveal" data-stagger>
-                  <div class="timeline-top">
-                    <strong>Recreation Assistant</strong>
-                    <span class="muted">Actihire (Part-time)</span>
-                  </div>
-                  <div class="timeline-bottom">Nov 2025 – Present</div>
-                </div>
-
-                <div class="timeline-item reveal" data-stagger>
-                  <div class="timeline-top">
-                    <strong>Junior C# Developer</strong>
-                    <span class="muted">Sparta Global</span>
-                  </div>
-                  <div class="timeline-bottom">Sep 2022 – Apr 2023</div>
-                </div>
-
-                <div class="timeline-item reveal" data-stagger>
-                  <div class="timeline-top">
-                    <strong>Junior Programmer</strong>
-                    <span class="muted">CMRRKAD System Ltd</span>
-                  </div>
-                  <div class="timeline-bottom">Aug 2021 – Aug 2022</div>
-                </div>
-
-                <div class="timeline-item reveal" data-stagger>
-                  <div class="timeline-top">
-                    <strong>Risk Review Consultant</strong>
-                    <span class="muted">ReTRRAC Global</span>
-                  </div>
-                  <div class="timeline-bottom">Jun 2022 – Jul 2022</div>
-                </div>
+            <div class="about-stats-col reveal" data-stagger>
+              <div class="about-stat-card">
+                <span class="stat-num">2</span>
+                <span class="stat-label">Years in industry</span>
+              </div>
+              <div class="about-stat-card">
+                <span class="stat-num">3</span>
+                <span class="stat-label">Companies worked at</span>
+              </div>
+              <div class="about-stat-card">
+                <span class="stat-num">BSc</span>
+                <span class="stat-label">Computer Science, ARU</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="projects" class="section projects" data-stagger>
+      <!-- SKILLS -->
+      <section id="skills" class="section">
         <div class="container">
-          <div class="section-head reveal" data-stagger>
-            <h2><span class="mono">/</span> Projects</h2>
-            <p>Selected clean, production minded builds.</p>
+          <div class="section-header reveal" data-stagger>
+            <div class="section-label">02 / Skills</div>
+            <h2 class="section-title">Technical Stack</h2>
+          </div>
+          <div class="skills-table reveal" data-stagger>
+
+            <div class="skills-row">
+              <div class="skills-row-label">
+                <div class="skills-row-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <span>Languages</span>
+              </div>
+              <div class="skills-chips">
+                <span class="chip chip-primary">C#</span>
+                <span class="chip chip-primary">C++</span>
+                <span class="chip chip-primary">SQL</span>
+                <span class="chip chip-primary">x86 / x64 Assembly</span>
+                <span class="chip">HTML</span>
+                <span class="chip">CSS</span>
+                <span class="chip">JavaScript</span>
+              </div>
+            </div>
+
+            <div class="skills-row">
+              <div class="skills-row-label">
+                <div class="skills-row-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <span>Frameworks</span>
+              </div>
+              <div class="skills-chips">
+                <span class="chip chip-primary">ASP.NET Core</span>
+                <span class="chip chip-primary">.NET</span>
+                <span class="chip">Microsoft Identity</span>
+                <span class="chip">Kestrel</span>
+                <span class="chip">Entity Framework</span>
+                <span class="chip">REST APIs</span>
+                <span class="chip">JWT Auth</span>
+              </div>
+            </div>
+
+            <div class="skills-row">
+              <div class="skills-row-label">
+                <div class="skills-row-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <span>Systems</span>
+              </div>
+              <div class="skills-chips">
+                <span class="chip chip-primary">Low-Level Debugging</span>
+                <span class="chip chip-primary">Reverse Engineering</span>
+                <span class="chip">Binary Analysis</span>
+                <span class="chip">DLL Injection</span>
+                <span class="chip">PE Format</span>
+              </div>
+            </div>
+
+            <div class="skills-row">
+              <div class="skills-row-label">
+                <div class="skills-row-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                </div>
+                <span>Tools</span>
+              </div>
+              <div class="skills-chips">
+                <span class="chip chip-primary">WinDbg</span>
+                <span class="chip chip-primary">IDA Pro</span>
+                <span class="chip chip-primary">Visual Studio</span>
+                <span class="chip">Git</span>
+                <span class="chip">GitHub</span>
+                <span class="chip">SQL Server</span>
+                <span class="chip">Agile</span>
+                <span class="chip">OOP</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience" class="section section-alt">
+        <div class="container">
+          <div class="section-header reveal" data-stagger>
+            <div class="section-label">03 / Experience</div>
+            <h2 class="section-title">Work History</h2>
+          </div>
+          <div class="timeline">
+
+            <div class="timeline-item reveal" data-stagger>
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div>
+                    <h3 class="timeline-role">Junior C# Developer</h3>
+                    <p class="timeline-company">Sparta Global</p>
+                  </div>
+                  <span class="timeline-date">Sep 2022 – Apr 2023</span>
+                </div>
+                <div class="timeline-meta">
+                  <span class="timeline-type">Full-time</span>
+                  <span class="timeline-location">London, Barbican · Hybrid</span>
+                </div>
+                <p class="timeline-desc">Underwent intensive training across a wide range of technologies with a focus on .NET, SQL, HTML, and CSS. Applied these skills in a professional setting, contributing to software delivery within a structured Agile environment.</p>
+                <div class="timeline-tags">
+                  <span>C#</span><span>.NET</span><span>SQL</span><span>HTML</span><span>CSS</span><span>Agile</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item reveal" data-stagger>
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div>
+                    <h3 class="timeline-role">Junior Programmer</h3>
+                    <p class="timeline-company">CMRRKAD System Ltd</p>
+                  </div>
+                  <span class="timeline-date">Aug 2021 – Aug 2022</span>
+                </div>
+                <div class="timeline-meta">
+                  <span class="timeline-type">Full-time</span>
+                  <span class="timeline-location">Grays, England · Hybrid</span>
+                </div>
+                <p class="timeline-desc">Contributed to live system modules including Timesheet and Payroll, gaining hands-on experience within a real production codebase. Worked with C++ and C# alongside SQL databases and full-stack responsibilities.</p>
+                <div class="timeline-tags">
+                  <span>C++</span><span>C#</span><span>SQL</span><span>Full-Stack</span><span>Software Testing</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item reveal" data-stagger>
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div>
+                    <h3 class="timeline-role">Risk Review Consultant</h3>
+                    <p class="timeline-company">ReTRRAC Global</p>
+                  </div>
+                  <span class="timeline-date">Jun 2022 – Jul 2022</span>
+                </div>
+                <div class="timeline-meta">
+                  <span class="timeline-type">Full-time</span>
+                  <span class="timeline-location">London, Shepherd's Bush · Remote</span>
+                </div>
+                <p class="timeline-desc">Trained to become a Regulatory Transformation and Risk Review Consultant, developing skills in identifying, assessing, and managing regulatory risk, KYC verification, and Anti-Money Laundering processes.</p>
+                <div class="timeline-tags">
+                  <span>KYC Verification</span><span>Anti-Money Laundering</span><span>Risk Review</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="section">
+        <div class="container">
+          <div class="section-header reveal" data-stagger>
+            <div class="section-label">04 / Projects</div>
+            <h2 class="section-title">Featured Work</h2>
           </div>
 
           <!-- Desktop: carousel -->
@@ -223,16 +320,13 @@
             <button class="proj-nav proj-nav--prev" type="button" aria-label="Previous project">
               <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
             </button>
-
             <div class="projects-stage">
               <div id="projectsGrid" class="projects-one" aria-live="polite"></div>
             </div>
-
             <div class="projects-meta-row">
               <div class="projects-dots" id="projectsDots" aria-label="Project pagination"></div>
               <div class="projects-count mono" id="projectsCount"></div>
             </div>
-
             <button class="proj-nav proj-nav--next" type="button" aria-label="Next project">
               <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
             </button>
@@ -241,7 +335,7 @@
           <!-- Mobile: list -->
           <div id="projectsList" class="projects-list" aria-label="Projects list"></div>
 
-          <div class="center" style="margin-top: 22px;">
+          <div class="center" style="margin-top:2rem">
             <a class="btn btn--ghost" href="https://github.com/SahilSingh021" target="_blank" rel="noreferrer">
               View GitHub <i class="ri-arrow-right-line" aria-hidden="true"></i>
             </a>
@@ -249,97 +343,99 @@
         </div>
       </section>
 
-      <section id="contact" class="section" data-stagger>
+      <!-- CONTACT -->
+      <section id="contact" class="section section-alt">
         <div class="container">
-          <div class="section-head reveal" data-stagger>
-            <h2><span class="mono">/</span> Contact</h2>
-            <p>Send me a message - I’ll reply as soon as I can.</p>
+          <div class="section-header reveal" data-stagger>
+            <div class="section-label">05 / Contact</div>
+            <h2 class="section-title">Get In Touch</h2>
           </div>
+          <div class="contact-grid">
 
-          <div class="contact">
-            <form class="form reveal" data-stagger method="post" action="https://formspree.io/f/xnqyeboy">
-              <label>
-                <span><span class="mono">$</span> name</span>
-                <input type="text" name="name" placeholder="Your name" required />
-              </label>
+            <div class="contact-info reveal" data-stagger>
+              <p class="contact-intro">I'm open to new opportunities, collaborations, and interesting projects. Whether you have a question, a role to discuss, or just want to connect, feel free to reach out.</p>
+              <div class="contact-links">
+                <a href="https://www.linkedin.com/in/sahilsingh021/" target="_blank" rel="noreferrer" class="contact-link">
+                  <div class="contact-link-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  </div>
+                  <div>
+                    <span class="contact-link-label">LinkedIn</span>
+                    <span class="contact-link-value">linkedin.com/in/sahilsingh021</span>
+                  </div>
+                </a>
+                <a href="https://github.com/SahilSingh021" target="_blank" rel="noreferrer" class="contact-link">
+                  <div class="contact-link-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  </div>
+                  <div>
+                    <span class="contact-link-label">GitHub</span>
+                    <span class="contact-link-value">github.com/SahilSingh021</span>
+                  </div>
+                </a>
+              </div>
+            </div>
 
-              <label>
-                <span><span class="mono">$</span> email</span>
-                <input type="email" name="email" placeholder="your@email.com" required />
-              </label>
-
-              <label>
-                <span><span class="mono">$</span> message</span>
-                <textarea name="message" placeholder="Your message..." rows="6" required></textarea>
-              </label>
-
-              <button class="btn btn--primary" type="submit">
-                Send <span class="mono" aria-hidden="true">↵</span>
+            <form class="contact-form-wrap reveal" data-stagger method="post" action="https://formspree.io/f/xnqyeboy">
+              <div class="form-group">
+                <label for="cf-name">Name</label>
+                <input type="text" id="cf-name" name="name" placeholder="Your name" required />
+              </div>
+              <div class="form-group">
+                <label for="cf-email">Email</label>
+                <input type="email" id="cf-email" name="email" placeholder="your@email.com" required />
+              </div>
+              <div class="form-group">
+                <label for="cf-msg">Message</label>
+                <textarea id="cf-msg" name="message" rows="5" placeholder="What's on your mind?" required></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary btn--full">
+                Send Message
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
               </button>
             </form>
 
-            <div class="panel reveal" data-stagger>
-              <h3 class="panel__title"><span class="mono">></span> Links</h3>
-
-              <div class="stack">
-                <a
-                  class="meta-link"
-                  href="https://www.linkedin.com/in/sahilsingh021/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <i class="ri-linkedin-box-line" aria-hidden="true"></i>
-                  LinkedIn
-                </a>
-                <a class="meta-link" href="https://github.com/SahilSingh021" target="_blank" rel="noreferrer">
-                  <i class="ri-github-line" aria-hidden="true"></i>
-                  GitHub
-                </a>
-              </div>
-
-              <div class="divider"></div>
-
-              <a class="btn btn--ghost" href="#home">Back to top <span class="mono" aria-hidden="true">↑</span></a>
-            </div>
           </div>
         </div>
       </section>
 
-      <footer class="footer reveal" data-stagger>
-        <div class="container footer__inner">
-          <span class="muted">© <span id="year"></span> Sahilpreet Singh</span>
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <p class="footer-copy">Built by <strong>Sahilpreet Singh</strong> &copy; <span id="year"></span></p>
+          <div class="footer-socials">
+            <a href="https://github.com/SahilSingh021" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/sahilsingh021/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
         </div>
       </footer>
 
+      <!-- MODAL -->
       <div class="modal" id="demoModal" hidden>
         <div class="modal__backdrop" data-modal-close></div>
-
         <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle">
           <div class="modal__bar" aria-hidden="true">
-            <span class="dot yellow-dark"></span>
-            <span class="dot yellow"></span>
-            <span class="dot yellow-light"></span>
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
             <span class="modal__title mono">~/notice</span>
-
             <button class="icon-btn modal__close" type="button" aria-label="Close" data-modal-close>
               <i class="ri-close-line" aria-hidden="true"></i>
             </button>
           </div>
-
           <div class="modal__body">
             <h3 class="modal__heading" id="demoModalTitle">Live demo not hosted yet</h3>
-            <p class="muted modal__text">I’ll add a hosted demo soon.</p>
-
+            <p class="modal__text">I'll add a hosted demo soon.</p>
             <div class="modal__actions">
               <button class="btn btn--primary btn--small" type="button" data-modal-close>Got it</button>
             </div>
           </div>
         </div>
       </div>
+
     </main>
 
-    <div class="bg-particles" aria-hidden="true"></div>
-
+    <div class="bg-layer" aria-hidden="true"></div>
     <script src="js/script.js"></script>
   </body>
 </html>
