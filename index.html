@@ -125,22 +125,27 @@
           </div>
           <div class="about-grid">
             <div class="about-text reveal" data-stagger>
-              <p>I'm <strong>Sahilpreet Singh</strong> (Sahil), a software developer in my final year of <strong>BSc Computer Science at Anglia Ruskin University</strong>. I enjoy building software that actually works well and is easy to maintain, from web platforms to things that run much closer to the metal.</p>
-              <p>My background covers C# backend development and REST APIs, picking up real-world experience at Sparta Global, as well as low-level work in C++ and x86/x64 assembly through both university and personal projects.</p>
-              <p>My final year project is <strong>ACSA</strong>, a competitive gaming platform with a custom anti-cheat system built in C++ and a web platform in ASP.NET Core. It brings together most of what I know into one real system.</p>
+              <p>I'm <strong>Sahil</strong>, a software developer in my final year of <strong>BSc Computer Science at Anglia Ruskin University</strong>. I like building things that actually work, from web platforms down to code that sits much closer to the hardware.</p>
+              <p>I tend to gravitate toward the parts of software that most people skip over: memory layouts, calling conventions, what the compiler decides to do with your code. It started as curiosity and turned into something I keep coming back to.</p>
+              <p>My background covers C# backend development, alongside low-level work in C++ and x86/x64 assembly picked up through personal projects. Most of what I know came from building things, watching them break, and figuring out why. A debugger and some patience will teach you more than documentation ever will.</p>
+              <p>Outside of a screen I travel often, and go down the occasional rabbit hole that has nothing to do with computers. I think that balance matters, as the best ideas usually come when you're not actively looking for them.</p>
             </div>
             <div class="about-stats-col reveal" data-stagger>
               <div class="about-stat-card">
-                <span class="stat-num">2</span>
+                <span class="stat-num" id="stat-years"></span>
                 <span class="stat-label">Years in industry</span>
               </div>
               <div class="about-stat-card">
-                <span class="stat-num">3</span>
+                <span class="stat-num" id="stat-companies"></span>
                 <span class="stat-label">Companies worked at</span>
               </div>
               <div class="about-stat-card">
                 <span class="stat-num">BSc</span>
                 <span class="stat-label">Computer Science, ARU</span>
+              </div>
+              <div class="about-stat-card">
+                <span class="stat-num" id="stat-year"></span>
+                <span class="stat-label">Open to opportunities</span>
               </div>
             </div>
           </div>
@@ -166,8 +171,8 @@
               <div class="skills-chips">
                 <span class="chip chip-primary">C#</span>
                 <span class="chip chip-primary">C++</span>
-                <span class="chip chip-primary">SQL</span>
                 <span class="chip chip-primary">x86 / x64 Assembly</span>
+                <span class="chip">SQL</span>
                 <span class="chip">HTML</span>
                 <span class="chip">CSS</span>
                 <span class="chip">JavaScript</span>
@@ -179,16 +184,15 @@
                 <div class="skills-row-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                 </div>
-                <span>Frameworks</span>
+                <span>Backend</span>
               </div>
               <div class="skills-chips">
                 <span class="chip chip-primary">ASP.NET Core</span>
                 <span class="chip chip-primary">.NET</span>
-                <span class="chip">Microsoft Identity</span>
-                <span class="chip">Kestrel</span>
                 <span class="chip">Entity Framework</span>
                 <span class="chip">REST APIs</span>
                 <span class="chip">JWT Auth</span>
+                <span class="chip">Microsoft Identity</span>
               </div>
             </div>
 
@@ -197,33 +201,30 @@
                 <div class="skills-row-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <span>Systems</span>
+                <span>Low-Level</span>
               </div>
               <div class="skills-chips">
-                <span class="chip chip-primary">Low-Level Debugging</span>
                 <span class="chip chip-primary">Reverse Engineering</span>
-                <span class="chip">Binary Analysis</span>
+                <span class="chip chip-primary">Binary Analysis</span>
                 <span class="chip">DLL Injection</span>
                 <span class="chip">PE Format</span>
+                <span class="chip">Memory Analysis</span>
               </div>
             </div>
 
             <div class="skills-row">
               <div class="skills-row-label">
                 <div class="skills-row-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                 </div>
-                <span>Tools</span>
+                <span>Tooling</span>
               </div>
               <div class="skills-chips">
                 <span class="chip chip-primary">WinDbg</span>
                 <span class="chip chip-primary">IDA Pro</span>
-                <span class="chip chip-primary">Visual Studio</span>
+                <span class="chip">Visual Studio</span>
                 <span class="chip">Git</span>
-                <span class="chip">GitHub</span>
                 <span class="chip">SQL Server</span>
-                <span class="chip">Agile</span>
-                <span class="chip">OOP</span>
               </div>
             </div>
 
@@ -315,7 +316,6 @@
             <h2 class="section-title">Featured Work</h2>
           </div>
 
-          <!-- Desktop: carousel -->
           <div class="projects-focus" aria-label="Project carousel">
             <button class="proj-nav proj-nav--prev" type="button" aria-label="Previous project">
               <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
@@ -332,7 +332,6 @@
             </button>
           </div>
 
-          <!-- Mobile: list -->
           <div id="projectsList" class="projects-list" aria-label="Projects list"></div>
 
           <div class="center" style="margin-top:2rem">
@@ -414,21 +413,16 @@
       <div class="modal" id="demoModal" hidden>
         <div class="modal__backdrop" data-modal-close></div>
         <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle">
-          <div class="modal__bar" aria-hidden="true">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
-            <span class="modal__title mono">~/notice</span>
-            <button class="icon-btn modal__close" type="button" aria-label="Close" data-modal-close>
-              <i class="ri-close-line" aria-hidden="true"></i>
-            </button>
+          <button class="modal__close icon-btn" type="button" aria-label="Close" data-modal-close>
+            <i class="ri-close-line" aria-hidden="true"></i>
+          </button>
+          <div class="modal__icon" aria-hidden="true">
+            <i class="ri-time-line"></i>
           </div>
-          <div class="modal__body">
-            <h3 class="modal__heading" id="demoModalTitle">Live demo not hosted yet</h3>
-            <p class="modal__text">I'll add a hosted demo soon.</p>
-            <div class="modal__actions">
-              <button class="btn btn--primary btn--small" type="button" data-modal-close>Got it</button>
-            </div>
+          <h3 class="modal__heading" id="demoModalTitle">Not yet hosted</h3>
+          <p class="modal__text">A live demo isn't up yet. The full source is on GitHub if you want to look through the code.</p>
+          <div class="modal__actions">
+            <button class="btn btn--ghost btn--small" type="button" data-modal-close>Got it</button>
           </div>
         </div>
       </div>

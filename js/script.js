@@ -1,5 +1,4 @@
 (() => {
-  // Theme toggle
   const themeToggle = document.getElementById("themeToggle");
   const themeIcon   = document.getElementById("themeIcon");
 
@@ -11,7 +10,6 @@
     localStorage.setItem("theme", theme);
   };
 
-  // match icon to current theme
   const initialTheme = document.documentElement.getAttribute("data-theme") || "light";
   applyTheme(initialTheme);
 
@@ -20,7 +18,6 @@
     applyTheme(current === "dark" ? "light" : "dark");
   });
 
-  // Main site logic
   const header = document.querySelector(".site-header");
   const menuToggle = document.getElementById("menuToggle");
   const mobileMenu = document.getElementById("mobileMenu");
@@ -85,7 +82,6 @@
     window.scrollTo({ top: y, behavior: prefersReduced ? "auto" : "smooth" });
   };
 
-  // Anchor navigation
   document.addEventListener("click", (e) => {
     const anchor = e.target.closest('a[href^="#"]');
     if (!anchor) return;
@@ -107,7 +103,6 @@
     if (mobileMenu && !mobileMenu.hidden) closeMenu();
   });
 
-  // menu wiring
   if (menuToggle && mobileMenu) {
     menuToggle.addEventListener("click", toggleMenu);
     document.addEventListener("keydown", (e) => {
@@ -154,7 +149,6 @@
     });
   };
 
-  // reveal animations
   const revealEls = Array.from(document.querySelectorAll(".reveal"));
   if (!prefersReduced) {
     const revealObserver = new IntersectionObserver(
@@ -181,11 +175,38 @@
     revealEls.forEach((el) => el.classList.add("is-in"));
   }
 
-  // year
   const year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
+  const statYear = document.getElementById("stat-year");
+  if (statYear) statYear.textContent = String(new Date().getFullYear());
 
-  // modal
+  // live stats from timeline
+  (function () {
+    const MONTHS = { Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11 };
+    function parseDate(str) {
+      str = str.trim();
+      if (/present/i.test(str)) return new Date();
+      const [m, y] = str.split(" ");
+      return new Date(parseInt(y), MONTHS[m] ?? 0, 1);
+    }
+    const dateEls = document.querySelectorAll(".timeline-date");
+    let minStart = null, maxEnd = null;
+    dateEls.forEach(el => {
+      const parts = el.textContent.trim().split(/\s*[–\-]\s*/);
+      if (parts.length < 2) return;
+      const s = parseDate(parts[0]), e = parseDate(parts[1]);
+      if (!minStart || s < minStart) minStart = s;
+      if (!maxEnd || e > maxEnd) maxEnd = e;
+    });
+    const elYears = document.getElementById("stat-years");
+    if (elYears && minStart && maxEnd) {
+      const yrs = Math.round((maxEnd - minStart) / (1000 * 60 * 60 * 24 * 365));
+      elYears.textContent = yrs || 1;
+    }
+    const elCo = document.getElementById("stat-companies");
+    if (elCo) elCo.textContent = document.querySelectorAll(".timeline-item").length;
+  })();
+
   const demoModal = document.getElementById("demoModal");
   let lastFocused = null;
 
@@ -213,7 +234,6 @@
     });
   }
 
-  // projects
   const projects = [
     {
       title: "ACSA - AssaultCube Secure Arena",
@@ -229,6 +249,22 @@
       ],
       tags: ["Identity", "JWT", "Kestrel", "Anti-Cheat", ".dll"],
       links: { demo: null, repo: "https://github.com/SahilSingh021/acsa-showcase" },
+    },
+    {
+      title: "Portfolio",
+      subtitle: "Personal project • this site",
+      description:
+        "A personal portfolio built from scratch using vanilla HTML, CSS, and JavaScript. Designed to be fast, clean, and easy to maintain without relying on any frameworks or build tools.",
+      stack: ["HTML", "CSS", "JS"],
+      highlights: [
+        "Light and dark mode with system preference detection",
+        "Seamless infinite ticker using requestAnimationFrame",
+        "Typewriter animation cycling through role descriptions",
+        "Scroll-reveal animations and a JS-driven project carousel",
+      ],
+      tags: ["Vanilla JS", "CSS", "No Framework"],
+      current: true,
+      links: { demo: null, repo: "https://github.com/SahilSingh021/Portfolio-Site" },
     },
   ];
 
@@ -253,12 +289,13 @@
   const renderProjectCard = (p, idx) => {
     const stackHtml = (p.stack || []).map(pill).join("");
     const highlightsHtml = (p.highlights || []).map((x) => `<li>${escapeHtml(x)}</li>`).join("");
-    const tagsHtml = (p.tags || []).map(tag).join("");
     const num = String((idx ?? 0) + 1).padStart(2, "0");
 
-    const demoBtn = p.links?.demo
-      ? `<a class="btn btn--primary btn--small" href="${escapeHtml(p.links.demo)}" target="_blank" rel="noreferrer"><i class="ri-external-link-line" aria-hidden="true"></i> Live Demo</a>`
-      : `<button class="btn btn--primary btn--small" type="button" data-open-demo-modal><i class="ri-play-circle-line" aria-hidden="true"></i> Live Demo</button>`;
+    const demoBtn = p.current
+      ? `<span class="btn btn--current btn--small"><i class="ri-radio-button-line" aria-hidden="true"></i> Current</span>`
+      : p.links?.demo
+        ? `<a class="btn btn--primary btn--small" href="${escapeHtml(p.links.demo)}" target="_blank" rel="noreferrer"><i class="ri-external-link-line" aria-hidden="true"></i> Live Demo</a>`
+        : `<button class="btn btn--primary btn--small" type="button" data-open-demo-modal><i class="ri-play-circle-line" aria-hidden="true"></i> Live Demo</button>`;
 
     const repoBtn = p.links?.repo
       ? `<a class="btn btn--ghost btn--small" href="${escapeHtml(p.links.repo)}" target="_blank" rel="noreferrer"><i class="ri-github-line" aria-hidden="true"></i> Repo</a>`
@@ -267,24 +304,17 @@
     return `
       <article class="project-card project-swap-in">
         <div class="pc-wrap">
-
-          <!-- left accent column -->
-          <div class="pc-col-left">
+          <div class="pc-top">
             <span class="pc-num mono">${num}</span>
             <div class="pc-stack">${stackHtml}</div>
+          </div>
+          <h3 class="pc-title">${escapeHtml(p.title)}</h3>
+          <p class="pc-sub">${escapeHtml(p.subtitle)}</p>
+          <p class="pc-desc">${escapeHtml(p.description)}</p>
+          ${highlightsHtml ? `<ul class="pc-highlights">${highlightsHtml}</ul>` : ""}
+          <div class="pc-footer">
             <div class="pc-cta">${demoBtn}${repoBtn}</div>
           </div>
-
-          <!-- right content column -->
-          <div class="pc-col-right">
-            <div class="pc-eyebrow mono">Featured Project</div>
-            <h3 class="pc-title">${escapeHtml(p.title)}</h3>
-            <p class="pc-sub">${escapeHtml(p.subtitle)}</p>
-            <p class="pc-desc">${escapeHtml(p.description)}</p>
-            ${highlightsHtml ? `<ul class="pc-highlights">${highlightsHtml}</ul>` : ""}
-            <ul class="pc-tags">${tagsHtml}</ul>
-          </div>
-
         </div>
       </article>
     `;
@@ -323,20 +353,45 @@
     if (nextBtn) nextBtn.disabled = disabled;
   };
 
-  const setActiveProject = (idx) => {
-    activeIndex = (idx + projects.length) % projects.length;
+  let transitioning = false;
 
-    if (projectsGrid) {
-      projectsGrid.innerHTML = renderProjectCard(projects[activeIndex], activeIndex);
-      bindModalButtons(projectsGrid);
+  const setActiveProject = (idx, dir = 1) => {
+    if (transitioning) return;
+    transitioning = true;
+
+    const nextIndex = (idx + projects.length) % projects.length;
+    const outClass = "pc-out";
+    const inClass  = dir >= 0 ? "pc-in-next" : "pc-in-prev";
+
+    const old = projectsGrid?.querySelector(".project-card");
+    if (old) {
+      old.classList.add(outClass);
+      setTimeout(() => {
+        activeIndex = nextIndex;
+        if (projectsGrid) {
+          projectsGrid.innerHTML = renderProjectCard(projects[activeIndex], activeIndex);
+          projectsGrid.querySelector(".project-card")?.classList.add(inClass);
+          bindModalButtons(projectsGrid);
+        }
+        renderDots();
+        updateNavState();
+        transitioning = false;
+      }, 180);
+    } else {
+      activeIndex = nextIndex;
+      if (projectsGrid) {
+        projectsGrid.innerHTML = renderProjectCard(projects[activeIndex], activeIndex);
+        projectsGrid.querySelector(".project-card")?.classList.add(inClass);
+        bindModalButtons(projectsGrid);
+      }
+      renderDots();
+      updateNavState();
+      transitioning = false;
     }
-
-    renderDots();
-    updateNavState();
   };
 
-  prevBtn?.addEventListener("click", () => setActiveProject(activeIndex - 1));
-  nextBtn?.addEventListener("click", () => setActiveProject(activeIndex + 1));
+  prevBtn?.addEventListener("click", () => setActiveProject(activeIndex - 1, -1));
+  nextBtn?.addEventListener("click", () => setActiveProject(activeIndex + 1,  1));
 
   document.addEventListener("keydown", (e) => {
     const tagName = document.activeElement?.tagName?.toLowerCase();
@@ -346,7 +401,6 @@
     if (e.key === "ArrowRight") setActiveProject(activeIndex + 1);
   });
 
-  // typewriter
   function initTypewriter() {
     const el = document.querySelector(".hero-desc");
     if (!el || prefersReduced) {
@@ -357,7 +411,8 @@
       "I build practical software and web experiences.",
       "I write C# backends, REST APIs, and .NET systems.",
       "I work at the binary level: C++ and x86 assembly.",
-      "I build anti-cheat systems and competitive platforms.",
+      "I reverse engineer binaries and analyse PE structures.",
+      "I build from the ground up, not just glue APIs together.",
     ];
 
     el.innerHTML = '<span class="tw-text"></span><span class="tw-cursor" aria-hidden="true"></span>';
@@ -365,7 +420,7 @@
 
     let pi = 0, ci = 0, deleting = false;
     const TYPE  = 44;   // ms per character while typing
-    const DEL   = 20;   // ms per character while deleting
+    const DEL   = 30;   // ms per character while deleting
     const HOLD  = 2000; // pause after phrase is fully typed
     const REST  = 380;  // pause after phrase is fully deleted
 
@@ -397,7 +452,6 @@
     setTimeout(tick, 700);
   }
 
-  // ticker
   function initTicker() {
     const wrap = document.querySelector(".ticker-wrap");
     const orig = document.querySelector(".ticker-track");
@@ -421,7 +475,7 @@
 
     let pos     = 0;
     let running = true;
-    const SPEED = 0.8; // px per frame at 60 fps ≈ 48 px/s
+    const SPEED = 0.4; // px per frame at 60 fps ≈ 48 px/s
 
     wrap.addEventListener("mouseenter", () => running = false);
     wrap.addEventListener("mouseleave",  () => running = true);
@@ -436,7 +490,6 @@
     })();
   }
 
-  // init
   recalcSectionTops();
   setHeaderState();
   setActiveNav(getActiveKeyFromScroll());
