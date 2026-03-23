@@ -338,6 +338,7 @@ body.menu-open{overflow:hidden}
   font-size:1.05rem;
   flex:1;
   min-width:240px;
+  min-height:calc(1.05rem * 1.75 * 2);
 }
 
 /* typewriter */
