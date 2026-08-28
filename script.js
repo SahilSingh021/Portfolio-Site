@@ -1,16 +1,19 @@
 (function () {
   'use strict';
 
+  // Blank this out to run the form in demo mode: it shows the sent state without posting anywhere.
   var FORM_ENDPOINT = 'https://formspree.io/f/xnqyeboy';
 
   var THEME_KEY = 'sahil-portfolio-theme';
-  var MOBILE_BREAKPOINT = 768;
+  var MOBILE_BREAKPOINT = 768; // matches the 767px media query in styles.css
 
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) {
     return Array.prototype.slice.call((root || document).querySelectorAll(sel));
   };
 
+  // The inline script in <head> picks the theme before first paint so there is no flash.
+  // This just keeps the toggle's label honest afterwards.
   var themeToggle = $('#theme-toggle');
 
   function currentTheme() {
@@ -57,6 +60,7 @@
     if (window.innerWidth >= MOBILE_BREAKPOINT && !mobileMenu.hidden) setMenu(false);
   });
 
+  // Accordion: one role open at a time, and clicking the open one shuts it.
   var roles = $$('.role');
 
   function setRole(role, open) {
@@ -97,6 +101,7 @@
     });
   });
 
+  // Shared dialog for project cards with no live demo to link to.
   var modal = $('#modal');
   var modalDialog = $('.modal__dialog', modal);
   var modalSource = $('#modal-source');
@@ -107,10 +112,12 @@
   function openModal(trigger) {
     lastFocused = trigger;
 
+    // Each trigger carries its own repo link.
     var source = trigger.getAttribute('data-source');
     if (source) modalSource.href = source;
 
     modal.hidden = false;
+    // Lock the page behind the dialog. scrollbar-gutter in the CSS stops the layout jumping.
     document.body.style.overflow = 'hidden';
     modalDialog.focus();
   }
@@ -132,6 +139,7 @@
     el.addEventListener('click', closeModal);
   });
 
+  // Keep Tab cycling inside the dialog while it is open.
   modal.addEventListener('keydown', function (event) {
     if (event.key !== 'Tab') return;
 
@@ -177,6 +185,7 @@
     }
   }
 
+  // One shot: the submit button is replaced, so there is no second send without a reload.
   function showSent() {
     var chip = document.createElement('span');
     chip.className = 'form__sent';
@@ -186,6 +195,9 @@
     var button = $('.btn--submit', formFoot);
     if (button) button.replaceWith(chip);
     if (formNote) formNote.hidden = true;
+
+    // Only clear the fields once the send is confirmed.
+    form.reset();
   }
 
   form.addEventListener('submit', function (event) {
@@ -216,6 +228,7 @@
         if (!response.ok) throw new Error('Form endpoint returned ' + response.status);
         showSent();
       })
+      // Leave whatever they typed in place so a failed send costs them nothing.
       .catch(function () {
         if (button) button.disabled = false;
         formNote.hidden = false;
@@ -229,6 +242,7 @@
     }
   });
 
+  // The sticky header is 64px tall, so mark a section active shortly before it reaches the top.
   var SPY_OFFSET = 96;
 
   var spySections = ['work', 'experience', 'about', 'contact']
@@ -260,6 +274,7 @@
     return active;
   }
 
+  // Scroll fires far more often than we need, so coalesce to one update per frame.
   var spyQueued = false;
 
   function updateSpy() {
@@ -306,6 +321,8 @@
     return date.getFullYear() * 12 + date.getMonth();
   }
 
+  // Two roles overlap in mid 2022. MERGE_OVERLAPS counts that stretch once instead of twice,
+  // and INCLUSIVE_END counts the final month of a role as worked.
   var MERGE_OVERLAPS = false;
   var INCLUSIVE_END = false;
 
@@ -369,4 +386,40 @@
   updateFigures();
 
   $('#footer-year').textContent = String(new Date().getFullYear());
+
+  // A note for anyone who opens the console. Greys and the brand orange both stay legible
+  // whether their devtools are set to light or dark.
+  var BRAND = '#e8913f';
+  var MONO = 'ui-monospace,SFMono-Regular,Menlo,Consolas,monospace';
+
+  var ink = {
+    name: 'color:' + BRAND + ';font:700 17px/2.2 ' + MONO + ';letter-spacing:0.22em;',
+    label: 'color:' + BRAND + ';font:600 12px/1.8 ' + MONO + ';',
+    body: 'color:#8d8d8d;font:400 12px/1.8 ' + MONO + ';'
+  };
+
+  console.log('%cSAHILPREET SINGH', ink.name);
+  console.log('%cDebugger attached.', ink.label);
+  console.log(
+    '%cMost days I write the code that watches for exactly this.\n' +
+    'This one is not watching, so poke around.',
+    ink.body
+  );
+  console.log('%cRun %cwhoami()%c when you are ready.', ink.body, ink.label, ink.body);
+
+  window.whoami = function () {
+    [
+      ['role', 'Junior Software Engineer'],
+      ['at', 'Pillarhouse International'],
+      ['where', 'London, UK'],
+      ['stack', 'C# / .NET / VB / C++ / x86-x64 asm'],
+      ['into', 'reverse engineering, anti-cheat, memory'],
+      ['code', 'github.com/SahilSingh021'],
+      ['connect', 'linkedin.com/in/sahilsingh021']
+    ].forEach(function (row) {
+      console.log('%c' + (row[0] + '          ').slice(0, 10) + '%c' + row[1], ink.label, ink.body);
+    });
+
+    return 'Contact form is down at #contact if you want to say hi.';
+  };
 })();
