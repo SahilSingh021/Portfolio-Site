@@ -1,19 +1,18 @@
 (function () {
   'use strict';
 
-  // Blank this out to run the form in demo mode: it shows the sent state without posting anywhere.
+  // blank = demo mode
   var FORM_ENDPOINT = 'https://formspree.io/f/xnqyeboy';
 
   var THEME_KEY = 'sahil-portfolio-theme';
-  var MOBILE_BREAKPOINT = 768; // matches the 767px media query in styles.css
+  var MOBILE_BREAKPOINT = 768; // keep in sync with the css
 
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) {
     return Array.prototype.slice.call((root || document).querySelectorAll(sel));
   };
 
-  // The inline script in <head> picks the theme before first paint so there is no flash.
-  // This just keeps the toggle's label honest afterwards.
+  // theme is set in <head>
   var themeToggle = $('#theme-toggle');
 
   function currentTheme() {
@@ -60,7 +59,7 @@
     if (window.innerWidth >= MOBILE_BREAKPOINT && !mobileMenu.hidden) setMenu(false);
   });
 
-  // Accordion: one role open at a time, and clicking the open one shuts it.
+  // one open at a time
   var roles = $$('.role');
 
   function setRole(role, open) {
@@ -101,7 +100,7 @@
     });
   });
 
-  // Shared dialog for project cards with no live demo to link to.
+  // no-demo modal
   var modal = $('#modal');
   var modalDialog = $('.modal__dialog', modal);
   var modalSource = $('#modal-source');
@@ -112,12 +111,11 @@
   function openModal(trigger) {
     lastFocused = trigger;
 
-    // Each trigger carries its own repo link.
     var source = trigger.getAttribute('data-source');
     if (source) modalSource.href = source;
 
     modal.hidden = false;
-    // Lock the page behind the dialog. scrollbar-gutter in the CSS stops the layout jumping.
+    // lock scroll
     document.body.style.overflow = 'hidden';
     modalDialog.focus();
   }
@@ -139,7 +137,7 @@
     el.addEventListener('click', closeModal);
   });
 
-  // Keep Tab cycling inside the dialog while it is open.
+  // focus trap
   modal.addEventListener('keydown', function (event) {
     if (event.key !== 'Tab') return;
 
@@ -185,7 +183,7 @@
     }
   }
 
-  // One shot: the submit button is replaced, so there is no second send without a reload.
+  // no second send
   function showSent() {
     var chip = document.createElement('span');
     chip.className = 'form__sent';
@@ -196,7 +194,7 @@
     if (button) button.replaceWith(chip);
     if (formNote) formNote.hidden = true;
 
-    // Only clear the fields once the send is confirmed.
+    // only on success
     form.reset();
   }
 
@@ -228,7 +226,7 @@
         if (!response.ok) throw new Error('Form endpoint returned ' + response.status);
         showSent();
       })
-      // Leave whatever they typed in place so a failed send costs them nothing.
+      // keep their text
       .catch(function () {
         if (button) button.disabled = false;
         formNote.hidden = false;
@@ -242,7 +240,7 @@
     }
   });
 
-  // The sticky header is 64px tall, so mark a section active shortly before it reaches the top.
+  // sticky header is 64px
   var SPY_OFFSET = 96;
 
   var spySections = ['work', 'experience', 'about', 'contact']
@@ -274,7 +272,7 @@
     return active;
   }
 
-  // Scroll fires far more often than we need, so coalesce to one update per frame.
+  // one update per frame
   var spyQueued = false;
 
   function updateSpy() {
@@ -321,8 +319,7 @@
     return date.getFullYear() * 12 + date.getMonth();
   }
 
-  // Two roles overlap in mid 2022. MERGE_OVERLAPS counts that stretch once instead of twice,
-  // and INCLUSIVE_END counts the final month of a role as worked.
+  // 2022 roles overlap
   var MERGE_OVERLAPS = false;
   var INCLUSIVE_END = false;
 
@@ -387,8 +384,7 @@
 
   $('#footer-year').textContent = String(new Date().getFullYear());
 
-  // A note for anyone who opens the console. Greys and the brand orange both stay legible
-  // whether their devtools are set to light or dark.
+  // console egg
   var BRAND = '#e8913f';
   var MONO = 'ui-monospace,SFMono-Regular,Menlo,Consolas,monospace';
 
