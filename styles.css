@@ -564,7 +564,8 @@ svg { display: block; }
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* min() lets the track shrink below 300px on narrow phones instead of overflowing. */
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: var(--s-4);
 }
 
@@ -593,6 +594,18 @@ svg { display: block; }
   display: flex;
   flex-direction: column;
   gap: var(--s-2);
+}
+
+/* This one wraps on a phone, so it needs real leading rather than the tight single-line default. */
+.card__head .eyebrow {
+  line-height: 1.6;
+  text-wrap: balance;
+}
+
+/* On a phone, break at the separator instead of letting the phrase snap wherever it lands. */
+@media (max-width: 767px) {
+  .card__head .eyebrow__part { display: block; }
+  .card__head .eyebrow__sep { display: none; }
 }
 
 .card__title {
