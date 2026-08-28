@@ -1,11 +1,10 @@
 (function () {
   'use strict';
 
-  // blank = demo mode
   var FORM_ENDPOINT = 'https://formspree.io/f/xnqyeboy';
 
   var THEME_KEY = 'sahil-portfolio-theme';
-  var MOBILE_BREAKPOINT = 768; // keep in sync with the css
+  var MOBILE_BREAKPOINT = 768;
 
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) {
@@ -137,28 +136,33 @@
     el.addEventListener('click', closeModal);
   });
 
-  // focus trap
-  modal.addEventListener('keydown', function (event) {
-    if (event.key !== 'Tab') return;
+  // focus trap, shared by both dialogs
+  function trapTab(root, dialog) {
+    root.addEventListener('keydown', function (event) {
+      if (event.key !== 'Tab') return;
 
-    var items = $$(FOCUSABLE, modalDialog);
-    if (!items.length) return;
+      var items = $$(FOCUSABLE, dialog);
+      if (!items.length) return;
 
-    var first = items[0];
-    var last = items[items.length - 1];
+      var first = items[0];
+      var last = items[items.length - 1];
 
-    if (event.shiftKey && (document.activeElement === first || document.activeElement === modalDialog)) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  });
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === dialog)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+  }
+
+  trapTab(modal, modalDialog);
 
   document.addEventListener('keydown', function (event) {
     if (event.key !== 'Escape') return;
     closeModal();
+    closeCheats();
     if (!mobileMenu.hidden) setMenu(false);
   });
 
@@ -383,6 +387,50 @@
   updateFigures();
 
   $('#footer-year').textContent = String(new Date().getFullYear());
+
+  // triple-click the dot after the name
+  var cheats = $('#cheats');
+  var cheatsDialog = $('.modal__dialog', cheats);
+  var wordmark = $('.wordmark');
+  var dot = $('.wordmark__dot');
+  var taps = 0;
+  var tapTimer = null;
+
+  trapTab(cheats, cheatsDialog);
+
+  function openCheats() {
+    cheats.hidden = false;
+    document.body.style.overflow = 'hidden';
+    cheatsDialog.focus();
+  }
+
+  function closeCheats() {
+    if (cheats.hidden) return;
+
+    cheats.hidden = true;
+    document.body.style.overflow = '';
+    if (wordmark) wordmark.focus();
+  }
+
+  $$('[data-close-cheats]', cheats).forEach(function (el) {
+    el.addEventListener('click', closeCheats);
+  });
+
+  if (dot) {
+    dot.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      taps++;
+      clearTimeout(tapTimer);
+      tapTimer = setTimeout(function () { taps = 0; }, 600);
+
+      if (taps >= 3) {
+        taps = 0;
+        openCheats();
+      }
+    });
+  }
 
   // console egg
   var BRAND = '#e8913f';

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>404 &middot; Page not found</title>
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light dark">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23e8913f'/><text x='16' y='22' font-family='monospace' font-size='17' font-weight='700' text-anchor='middle' fill='%23231f1c'>S</text></svg>">
+
+<script>
+  (function () {
+    var theme = 'light';
+    try {
+      var saved = localStorage.getItem('sahil-portfolio-theme');
+      theme = (saved === 'light' || saved === 'dark')
+        ? saved
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    } catch (e) {}
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --surface: oklch(0.985 0.004 80);
+    --surface-sunken: oklch(0.955 0.006 80);
+    --border: oklch(0.895 0.007 80);
+    --border-strong: oklch(0.80 0.010 80);
+    --text-1: oklch(0.235 0.012 65);
+    --text-2: oklch(0.455 0.012 65);
+    --text-3: oklch(0.585 0.012 65);
+    --accent: oklch(0.660 0.150 62);
+    --accent-hover: oklch(0.580 0.155 60);
+    --accent-on: oklch(1 0 0);
+    --focus: oklch(0.560 0.150 60);
+    --font-sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', monospace;
+  }
+
+  [data-theme="dark"] {
+    --surface: oklch(0.185 0.008 65);
+    --surface-sunken: oklch(0.155 0.008 65);
+    --border: oklch(0.315 0.010 65);
+    --border-strong: oklch(0.420 0.012 65);
+    --text-1: oklch(0.955 0.004 80);
+    --text-2: oklch(0.775 0.010 75);
+    --text-3: oklch(0.640 0.012 70);
+    --accent: oklch(0.790 0.130 68);
+    --accent-hover: oklch(0.860 0.110 72);
+    --accent-on: oklch(0.185 0.020 65);
+    --focus: oklch(0.820 0.120 70);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: var(--surface);
+    color: var(--text-1);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .crash {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .crash__eyebrow {
+    font: 500 10px/1 var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  .crash__title {
+    margin: 8px 0 0;
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .dump {
+    background: var(--surface-sunken);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .dump__body {
+    margin: 0;
+    overflow-x: auto;
+    padding: 16px;
+    font: 400 12px/1.7 var(--font-mono);
+    color: var(--text-2);
+    white-space: pre;
+  }
+
+  .dump__body b {
+    display: block;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  .dump__home {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 56px;
+    padding: 0 16px;
+    border-top: 1px solid var(--border);
+    color: var(--accent);
+    text-decoration: none;
+    font: 500 13px/1 var(--font-mono);
+    letter-spacing: 0.02em;
+    transition: background 140ms cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  .dump__home:hover { background: var(--surface); }
+
+  a:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<main class="crash">
+  <div>
+    <span class="crash__eyebrow">Error 404</span>
+    <h1 class="crash__title">Page not found</h1>
+  </div>
+
+  <div class="dump">
+    <pre class="dump__body" id="dump-body"><b>EXCEPTION_ACCESS_VIOLATION (0xC0000005)</b>Attempted to read from 0x00000000
+
+module   portfolio.exe + 0x1A4F
+thread   main
+path     <span id="dump-path">/</span>
+
+stack
+  portfolio.exe!Router::Resolve()  + 0x1A4F
+  portfolio.exe!Page::Load()       + 0x0C12
+  portfolio.exe!main()             + 0x0042</pre>
+
+    <a class="dump__home" id="home" href="/">
+      <span>Return to a valid address</span>
+      <span aria-hidden="true">&#8594;</span>
+    </a>
+  </div>
+</main>
+
+<script>
+  (function () {
+    var FAULTS = [
+      {
+        test: /^(admin|administrator|login|wp-admin|wp-login\.php|dashboard)$/,
+        name: 'STATUS_ACCESS_DENIED',
+        code: '0xC0000022',
+        detail: 'Caller does not hold the required privileges',
+        module: 'portfolio.exe + 0x0B20',
+        stack: [['portfolio.exe!Auth::Elevate()', '0x0B20'],
+                ['portfolio.exe!Router::Resolve()', '0x1A4F'],
+                ['portfolio.exe!main()', '0x0042']]
+      },
+      {
+        test: /^(debug|console|dev|devtools)$/,
+        name: 'STATUS_BREAKPOINT',
+        code: '0x80000003',
+        detail: 'int 3 trapped, no debugger attached',
+        module: 'portfolio.exe + 0x00CC',
+        stack: [['portfolio.exe!Debug::Trap()', '0x00CC'],
+                ['portfolio.exe!Router::Resolve()', '0x1A4F'],
+                ['portfolio.exe!main()', '0x0042']]
+      },
+      {
+        test: /^(\.env|\.git|config|secrets|backup|phpmyadmin)$/,
+        name: 'STATUS_INVALID_HANDLE',
+        code: '0xC0000008',
+        detail: 'Handle was closed long before you got here',
+        module: 'scanner.exe + 0x0F00',
+        stack: [['scanner.exe!Probe::Fetch()', '0x0F00'],
+                ['portfolio.exe!Router::Resolve()', '0x1A4F'],
+                ['portfolio.exe!main()', '0x0042']]
+      }
+    ];
+
+    var DEFAULT_FAULT = {
+      name: 'EXCEPTION_ACCESS_VIOLATION',
+      code: '0xC0000005',
+      detail: 'Attempted to read from 0x00000000',
+      module: 'portfolio.exe + 0x1A4F',
+      stack: [['portfolio.exe!Router::Resolve()', '0x1A4F'],
+              ['portfolio.exe!Page::Load()', '0x0C12'],
+              ['portfolio.exe!main()', '0x0042']]
+    };
+
+    function pad(text, width) {
+      while (text.length < width) text += ' ';
+      return text;
+    }
+
+    // last segment, so /repo-name/ prefixes still match
+    var segment = location.pathname.toLowerCase().replace(/\/+$/, '').split('/').pop() || '';
+
+    var fault = DEFAULT_FAULT;
+    for (var i = 0; i < FAULTS.length; i++) {
+      if (FAULTS[i].test.test(segment)) { fault = FAULTS[i]; break; }
+    }
+
+    var lines = fault.stack.map(function (frame) {
+      return '  ' + pad(frame[0], 33) + '+ ' + frame[1];
+    }).join('\n');
+
+    var body = document.getElementById('dump-body');
+    if (body) {
+      var heading = document.createElement('b');
+      heading.textContent = fault.name + ' (' + fault.code + ')';
+
+      var rest = fault.detail +
+        '\n\nmodule   ' + fault.module +
+        '\nthread   main' +
+        '\npath     ' + (location.pathname + location.search) +
+        '\n\nstack\n' + lines;
+
+      body.textContent = '';
+      body.appendChild(heading);
+      body.appendChild(document.createTextNode(rest));
+    }
+
+    // "/" alone would leave a project page
+    var home = document.getElementById('home');
+    if (home && /(^|\.)github\.io$/.test(location.hostname)) {
+      var first = location.pathname.split('/')[1];
+      if (first) home.href = '/' + first + '/';
+    }
+  })();
+</script>
+
+</body>
+</html>

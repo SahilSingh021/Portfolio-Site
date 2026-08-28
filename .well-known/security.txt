@@ -1,0 +1,13 @@
+# You went looking for this file. That tells me something about you.
+#
+# I build anti-cheat and integrity tooling, so it would be poor form
+# not to have one. If you find something wrong with this site, or with
+# anything else of mine, I would genuinely like to hear about it.
+
+Contact: https://www.linkedin.com/in/sahilsingh021
+Contact: https://github.com/SahilSingh021
+Expires: 2027-08-28T00:00:00.000Z
+Preferred-Languages: en
+
+# No bug bounty, no legal team, no lawyers waiting. Just me, and I will
+# say thank you properly.

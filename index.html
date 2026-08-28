@@ -542,6 +542,11 @@
     </section>
   </main>
 
+  <p class="print-note">
+    You printed a portfolio. That is either very thorough or very old fashioned,
+    and I respect both. linkedin.com/in/sahilsingh021 &middot; github.com/SahilSingh021
+  </p>
+
   <footer class="footer">
     <div class="footer__inner">
       <span class="footer__text">&copy; <span id="footer-year">2026</span> Sahilpreet Singh</span>
@@ -549,6 +554,44 @@
     </div>
   </footer>
 
+</div>
+
+<div class="modal" id="cheats" hidden>
+  <div class="modal__backdrop" data-close-cheats></div>
+  <div class="modal__dialog modal__dialog--cheats" role="dialog" aria-modal="true" aria-labelledby="cheats-title" tabindex="-1">
+    <span class="eyebrow">Nice find</span>
+    <h2 class="modal__title" id="cheats-title">Cheat sheet</h2>
+
+    <div class="cheats">
+      <div class="cheats__group">
+        <span class="cheats__label">Console</span>
+        <div class="cheats__row"><code>whoami()</code><span>the short version of me</span></div>
+      </div>
+
+      <div class="cheats__group">
+        <span class="cheats__label">Source</span>
+        <div class="cheats__row"><code>view-source</code><span>a note above the html tag</span></div>
+        <div class="cheats__row"><a href=".well-known/security.txt" target="_blank" rel="noopener noreferrer"><code>security.txt</code></a><span>how to report a bug to me</span></div>
+      </div>
+
+      <div class="cheats__group">
+        <span class="cheats__label">Crash the router</span>
+        <div class="cheats__row"><a href="admin" target="_blank" rel="noopener noreferrer"><code>/admin</code></a><span>access denied</span></div>
+        <div class="cheats__row"><a href="debug" target="_blank" rel="noopener noreferrer"><code>/debug</code></a><span>breakpoint, no debugger attached</span></div>
+        <div class="cheats__row"><a href=".env" target="_blank" rel="noopener noreferrer"><code>/.env</code></a><span>invalid handle, scanner.exe</span></div>
+        <div class="cheats__row"><a href="anything-else" target="_blank" rel="noopener noreferrer"><code>/anything</code></a><span>access violation</span></div>
+      </div>
+
+      <div class="cheats__group">
+        <span class="cheats__label">This panel</span>
+        <div class="cheats__row"><code>. x3</code><span>the dot after my name, three times</span></div>
+      </div>
+    </div>
+
+    <div class="modal__actions">
+      <button class="btn btn--outline btn--sm" type="button" data-close-cheats>Close</button>
+    </div>
+  </div>
 </div>
 
 <div class="modal" id="modal" hidden>
