@@ -731,6 +731,14 @@ svg { display: block; }
   white-space: nowrap;
 }
 
+/* once this drops to its own line, push the chevron out to the edge */
+@media (max-width: 620px) {
+  .role__aside {
+    flex: 1 1 100%;
+    justify-content: space-between;
+  }
+}
+
 .role__chevron {
   width: 26px;
   height: 26px;
